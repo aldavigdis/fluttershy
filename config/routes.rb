@@ -1,4 +1,13 @@
 Fluttershy::Application.routes.draw do
+  
+  # Set the root to deliveries
+  # Todo: Change this to the login 
+  root "deliveries#index"
+  
+  # Routes for deliveries
+  get "deliveries/index"
+  get "deliveries" => 'deliveries#index'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
