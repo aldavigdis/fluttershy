@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	
+	<div class="container row span12">
+	
+	<%= nav_bar :brand => "Fluttershy", :responsive => true do %>
+	    <%= menu_group do %>
+	        <%= menu_item "Deliveries", deliveries_path %>
+	    <% end %>
+	<% end %>
 
-<%= yield %>
+	<%= yield %>
+	
+	</div>
 
 </body>
 </html>
