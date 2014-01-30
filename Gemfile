@@ -48,3 +48,10 @@ end
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
+
+# We're going to use the mysql2 gem
+gem "mysql2"
+
+group :development do
+  gem "better_errors"
+end
