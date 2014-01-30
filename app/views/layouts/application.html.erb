@@ -8,16 +8,21 @@
 </head>
 <body>
 	
-	<div class="container row span12">
+	<header class="row span12">
 	
-	<%= nav_bar :brand => "Fluttershy", :responsive => true do %>
-	    <%= menu_group do %>
-	        <%= menu_item "Deliveries", deliveries_path %>
-			<%= menu_item "Users", users_path %>
-	    <% end %>
-	<% end %>
+		<%= nav_bar :brand => "Fluttershy", :responsive => true do %>
+		    <%= menu_group do %>
+		        <%= menu_item "Deliveries", deliveries_path %>
+				<%= menu_item "Users", users_path %>
+				<%= menu_item "Companies", companies_path %>
+		    <% end %>
+		<% end %>
+	
+	</header>
+	
+	<div class="row span12" id="content-area">
 
-	<%= yield %>
+		<%= yield %>
 	
 	</div>
 

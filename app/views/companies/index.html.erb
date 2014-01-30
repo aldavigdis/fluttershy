@@ -1,2 +1,22 @@
-<h1>Companies#index</h1>
-<p>Find me in app/views/companies/index.html.erb</p>
+<h1>Companies</h1>
+
+<% if @companies.count == 0 %>
+
+<div class="alert">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<span>No companies have been registered yet.</span>
+</div>
+
+<% end %>
+
+<a href="/companies/new/" class="btn">New Company</a>
+
+<% if @companies.count != 0 %>
+
+<ul class="companies">
+	<% @companies.each do |company| %>
+	<li><%= link_to company.name, company %></li>
+	<% end %>
+</ul>
+
+<% end %>
