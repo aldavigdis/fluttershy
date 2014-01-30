@@ -2,7 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#content-area h1 { border-bottom: 1px solid #f0f0f0; padding-bottom: 0.5em; }
+
+#content-area .dangerous-buttons { text-align: right; }
+
+#content-area .top-buttons { margin: 1em 0.5em; }
+
 #content-area table { margin-bottom: 1em; }
+#content-area table address { margin-bottom: 0; }
 #content-area th[span=row] { padding-right: 1em; }
 
-#table-companies tbody td, #table-companies tbody th { vertical-align: middle; }
+@media (max-width: 767px) {
+	#table-companies .contact-name, #table-companies .billing-address { display: none; }
+	#content-area textarea#company_comments { height: 4em; }
+}
+
+@media (max-width: 480px) {
+	#table-companies .email, #table-companies .telephone { display: none; }
+}
+
+.edit_company .buttons { text-align: right; }

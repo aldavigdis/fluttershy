@@ -94,15 +94,15 @@
 			<fieldset class="comments">
 				<legend>Comments</legend>
 				<div class="control-group">
-					<%= f.text_area :comments, :rows => 6, :class => "span3" %>
+					<%= f.text_area :comments, :rows => 16, :class => "span3" %>
 				</div>
 			</fieldset>
 		</div>
 		
 	</div>
 	<div class="row">
-		<div class="control-group buttons span4">
-			<%= f.submit "Save", :class => "btn" %>
+		<div class="buttons span12">
+			<%= f.submit "Save »", :class => "btn btn-large btn-primary" %>
 		</div>
 	</div>
 <% end %>

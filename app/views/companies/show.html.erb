@@ -90,10 +90,6 @@
 			</tr>
 			<% end %>
 		</table>
-		<div>
-			<%= link_to "Edit", edit_company_path(@company), class: "btn edit" %>
-			<%= link_to "Delete Account", company_path(@company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-danger delete" %>
-		</div>
 	</div>
 	<div class="deliveries span3">
 		<h2>Users</h2>
@@ -103,6 +99,13 @@
 
 <div class="row">
 	
-	
+	<div class="buttons">
+		<div class="span2">
+			<%= link_to "Edit", edit_company_path(@company), class: "btn edit" %>
+		</div>
+		<div class="span2 dangerous-buttons">
+			<%= link_to "Delete Account", company_path(@company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-mini btn-danger delete" %>
+		</div>
+	</div>
 	
 </div>
