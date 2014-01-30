@@ -13,10 +13,45 @@
 
 <% if @companies.count != 0 %>
 
-<ul class="companies">
+<table class="table" id="table-companies">
+	
+	<thead>
+		<tr>
+			<th span="col">Company name</th>
+			<th span="col">Email</th>
+			<th span="col">Telephone</th>
+			<th span="col">Contact Name</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+
 	<% @companies.each do |company| %>
-	<li><%= link_to company.name, company %></li>
+	<tr>
+		<th span="row">
+			<%= link_to company.name, company %>
+			<% if ( ((company.kt).nil? || (company.kt).empty?) == false ) %>
+			(<%= company.kt %>)
+			<% end %>
+		</th>
+		<td>
+			<%= mail_to company.email %>
+		</td>
+		<td>
+			<a href="tel:<%= company.tel %>"><%= company.tel %></a>
+		</td>
+		<td>
+			<%= company.contact_name %>
+		</td>
+		<td>
+			<%= link_to "Edit", edit_company_path(company), class: "btn btn-small edit" %>
+			<%= link_to "Delete Account", company_path(company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-small btn-danger delete" %>
+		</td>
+	</tr>
 	<% end %>
-</ul>
+	
+	</tbody>
+
+</table>
 
 <% end %>
