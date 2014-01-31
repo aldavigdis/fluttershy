@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :access
       t.text :comments
       t.boolean :enabled
+      t.references :company, index: true
 
       t.timestamps
     end
