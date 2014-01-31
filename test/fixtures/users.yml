@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fullname: MyString
+  email: MyString
+  password: MyString
+  password_hash: MyString
+  recovery_code: MyString
+  recovery_expires: 2014-01-31 18:53:49
+  access: 1
+  comments: MyText
+  enabled: false
+
+two:
+  fullname: MyString
+  email: MyString
+  password: MyString
+  password_hash: MyString
+  recovery_code: MyString
+  recovery_expires: 2014-01-31 18:53:49
+  access: 1
+  comments: MyText
+  enabled: false
