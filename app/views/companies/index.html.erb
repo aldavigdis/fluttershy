@@ -1,4 +1,15 @@
-<h1>Companies</h1>
+<div class="row content-header">
+	
+	<nav class="span6 pull-right">
+		<ul class="breadcrumb">
+			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Companies", :action => "index" %></li>
+		</ul>
+	</nav>
+
+	<h1 class="span6">Companies</h1>
+
+</div>
 
 <% if @companies.count == 0 %>
 
@@ -26,7 +37,8 @@
 			<th span="col" class="email">Email</th>
 			<th span="col" class="telephone">Telephone</th>
 			<th span="col" class="contact-name">Contact Name</th>
-			<th span="col" class="billing-address">Billing Address</th>
+			<th span="col" class="billing-address span2">Billing Address</th>
+			<th class="buttons"></th>
 		</tr>
 	</thead>
 	
@@ -58,7 +70,8 @@
 			</address>
 		</td>
 		<td class="buttons">
-			<%= link_to "Edit", edit_company_path(company), class: "btn btn-mini edit" %>
+			<%= link_to "View", company, class: "btn btn-link view" %>
+			<%= link_to "Edit", edit_company_path(company), class: "btn edit" %>
 		</td>
 	</tr>
 	<% end %>

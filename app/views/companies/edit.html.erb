@@ -1,3 +1,15 @@
-<h1>Edit company</h1>
+<div class="row content-header">
+	
+	<nav class="span6 pull-right">
+		<ul class="breadcrumb">
+			<li><%= link_to "Companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to @company.name, @company %> <span class="divider">/</span></li>
+			<li><%= link_to "Edit", edit_company_path(@company) %></li>
+		</ul>
+	</nav>
+
+	<h1 class="span6">Edit company</h1>
+
+</div>
 
 <%= render "form" %>

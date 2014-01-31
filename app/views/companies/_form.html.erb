@@ -102,7 +102,8 @@
 	</div>
 	<div class="row">
 		<div class="buttons span12">
-			<%= f.submit "Save »", :class => "btn btn-large btn-primary" %>
+			<%= link_to "« Back", @company, :class => "btn btn-link pull-left" %>
+			<%= f.submit "Save »", :class => "btn btn-primary pull-right" %>
 		</div>
 	</div>
 <% end %>

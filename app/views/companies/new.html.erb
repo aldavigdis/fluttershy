@@ -1,3 +1,15 @@
-<h1>New company</h1>
+<div class="row content-header">
+	
+	<nav class="span6 pull-right">
+		<ul class="breadcrumb">
+			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to "New Company", :action => "new" %></li>
+		</ul>
+	</nav>
+
+	<h1 class="span6">New company</h1>
+
+</div>
 
 <%= render "form" %>
