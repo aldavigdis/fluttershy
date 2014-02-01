@@ -1,0 +1,42 @@
+<header>
+
+	<nav class="row">
+		<ul class="breadcrumb span4 pull-right">
+			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Companies", :controller => "companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to @company.name, @company %> <span class="divider">/</span></li>
+			<li><%= link_to "Users", :action => "index" %></li>
+		</ul>
+	</nav>
+
+	<div class="row">
+	
+		<div class="users-list span10 offset2">
+		
+			<h1>Users assigned to <%= @company.name %></h1>
+		
+		</div>
+	
+	</div>
+	
+	<div class="row">
+		<div class="top-buttons offset2">
+			<%= link_to "New User", nil, html_options = { class: "btn" } %>
+		</div>
+	</div>
+
+</header>
+
+<div class="row">
+	
+	<%= render "shared/company_sidebar" %>
+	
+	<div class="span10">
+		
+		<div class="alert">
+			<span>No users are assigned to this company. Self-service will not work.</span>
+		</div>
+		
+	</div>
+	
+</div>

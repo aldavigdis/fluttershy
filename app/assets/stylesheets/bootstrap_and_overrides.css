@@ -12,4 +12,4 @@
 
 /* Forms */
 #content-area .btn.delete { margin-left: 2em; }
-#content-area .top-buttons { margin: 1em 0.5em; }
+#content-area .top-buttons { margin-top: 0.5em; margin-bottom: 1em; }
