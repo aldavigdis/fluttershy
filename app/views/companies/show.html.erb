@@ -28,6 +28,7 @@
 				<th span="row" class="span3">Kt</th>
 				<td><a href="https://www.rsk.is/fyrirtaekjaskra/leit/kennitala/<%= @company.kt %>"><%= @company.kt %></a></td>
 			</tr>
+			<% end %>
 			<tr>
 				<th span="row" class="span3">Account Status</th>
 				<td>
@@ -38,7 +39,6 @@
 					<% end %>
 				</td>
 			</tr>
-			<% end %>
 			<% if @company.contact_name.present? %>
 			<tr class="contact-name">
 				<th span="row" class="span3">Contact Name</th>
