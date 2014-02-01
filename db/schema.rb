@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130112934) do
+ActiveRecord::Schema.define(version: 20140201071650) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -34,5 +34,22 @@ ActiveRecord::Schema.define(version: 20140130112934) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", force: true do |t|
+    t.string   "fullname"
+    t.string   "email"
+    t.string   "password"
+    t.string   "password_hash"
+    t.string   "recovery_code"
+    t.datetime "recovery_expires"
+    t.integer  "access"
+    t.text     "comments"
+    t.boolean  "enabled"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
 
 end

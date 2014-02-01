@@ -6,10 +6,11 @@ one:
   password: MyString
   password_hash: MyString
   recovery_code: MyString
-  recovery_expires: 2014-01-31 18:53:49
+  recovery_expires: 2014-02-01 07:16:55
   access: 1
   comments: MyText
   enabled: false
+  company_id: 
 
 two:
   fullname: MyString
@@ -17,7 +18,8 @@ two:
   password: MyString
   password_hash: MyString
   recovery_code: MyString
-  recovery_expires: 2014-01-31 18:53:49
+  recovery_expires: 2014-02-01 07:16:55
   access: 1
   comments: MyText
   enabled: false
+  company_id: 
