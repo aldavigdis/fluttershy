@@ -12,7 +12,11 @@
 #content-area table .buttons { text-align: right; width: 150px; }
 
 // Sidebar
-#company-show-sidebar { margin-top: 60px; }
+// #company-show-sidebar { margin-top: 60px; }
+
+@media (min-width: 768px) {
+	.breadcrumb { text-align: right; background-color: transparent; }
+}
 
 @media (max-width: 767px) {
 	#table-companies .contact-name, #table-companies .billing-address { display: none; }

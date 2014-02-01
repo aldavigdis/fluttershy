@@ -1,27 +1,36 @@
-<div class="row content-header">
-	
-	<nav class="span6 pull-right">
+<header>
+
+	<nav class="row">
 		<ul class="breadcrumb">
-			<li><%= link_to "Companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Companies", :controller => "companies", :action => "index" %> <span class="divider">/</span></li>
 			<li><%= link_to @company.name, @company %></li>
 		</ul>
 	</nav>
 
-	<h1 class="span6">View Company</h1>
+	<div class="row">
+	
+		<div class="users-list span6 offset2">
+		
+			<h1><%= @company.name %></h1>
+		
+		</div>
+	
+	</div>
 
+</header>
+
+<% if @company.enabled == false %>
+<div class="alert alert-error">
+	<span>This account is disabled.</span>
 </div>
+<% end %>
 
 <div class="row">
 	
-	<nav class="span2" id="company-show-sidebar">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><a href="">Users</a></li>
-			<li><a href="">Deliveries</a></li>
-		</ul>
-	</nav>
+	<%= render "shared/company_sidebar" %>
 	
 	<div class="basic-info span10">
-		<h2><%= @company.name %></h2>
 		<table class="table">
 			<% if @company.kt.present? %>
 			<tr class="kt">

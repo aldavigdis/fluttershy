@@ -1,15 +1,23 @@
-<div class="row content-header">
-	
-	<nav class="span6 pull-right">
+<header>
+
+	<nav class="row">
 		<ul class="breadcrumb">
 			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
 			<li><%= link_to "Companies", :action => "index" %></li>
 		</ul>
 	</nav>
 
-	<h1 class="span6">Companies</h1>
+	<div class="row">
+	
+		<div class="users-list span8">
+		
+			<h1>Companies</h1>
+		
+		</div>
+	
+	</div>
 
-</div>
+</header>
 
 <% if @companies.count == 0 %>
 
