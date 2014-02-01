@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201071650) do
+ActiveRecord::Schema.define(version: 20140201125820) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140201071650) do
   create_table "users", force: true do |t|
     t.string   "fullname"
     t.string   "email"
-    t.string   "password"
+    t.text     "password"
     t.string   "password_hash"
     t.string   "recovery_code"
     t.datetime "recovery_expires"

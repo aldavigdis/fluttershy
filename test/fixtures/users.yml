@@ -3,10 +3,10 @@
 one:
   fullname: MyString
   email: MyString
-  password: MyString
+  password: MyText
   password_hash: MyString
   recovery_code: MyString
-  recovery_expires: 2014-02-01 07:16:55
+  recovery_expires: 2014-02-01 12:58:20
   access: 1
   comments: MyText
   enabled: false
@@ -15,10 +15,10 @@ one:
 two:
   fullname: MyString
   email: MyString
-  password: MyString
+  password: MyText
   password_hash: MyString
   recovery_code: MyString
-  recovery_expires: 2014-02-01 07:16:55
+  recovery_expires: 2014-02-01 12:58:20
   access: 1
   comments: MyText
   enabled: false
