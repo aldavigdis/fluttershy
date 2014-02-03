@@ -6,11 +6,11 @@ one:
   password_hash: MyText
   password_seed: MyString
   recovery_code: MyString
-  recovery_expires: 2014-02-02 22:33:04
+  recovery_expires: 2014-02-03 11:18:46
   access: 1
   comments: MyText
   enabled: false
-  last_login: 2014-02-02 22:33:04
+  remember_hash: MyText
   company_id: 
 
 two:
@@ -19,9 +19,9 @@ two:
   password_hash: MyText
   password_seed: MyString
   recovery_code: MyString
-  recovery_expires: 2014-02-02 22:33:04
+  recovery_expires: 2014-02-03 11:18:46
   access: 1
   comments: MyText
   enabled: false
-  last_login: 2014-02-02 22:33:04
+  remember_hash: MyText
   company_id: 
