@@ -20,6 +20,15 @@ class UsersController < ApplicationController
   def update
     @company = Company.find(params[:company_id])
     @user = User.find(params[:id])
+    
+    user_seed = password_seed
+    user_hash = password_hash(params[:user]["password"], user_seed)
+    
+    if params[:user]["password"].present?
+      @user.update_attributes(:password_hash => user_hash, :password_seed => user_seed)
+      @user.save
+    end
+    
     if @user.update(params[:user].permit(:fullname, :email))
       redirect_to company_users_path(@company)
     else
@@ -31,10 +40,10 @@ class UsersController < ApplicationController
     @company = Company.find(params[:company_id])
     @user = User.new(user_params)
     
-    password_seed = SecureRandom.hex(n=32).to_i(16).to_s(36)    
-    password_hash = Digest::Whirlpool.hexdigest(params[:user]["password"]+password_seed)
+    user_seed = password_seed
+    user_hash = password_hash(params[:user]["password"], user_seed)
     
-    @user.update_attributes(:password_hash => password_hash, :password_seed => password_seed, :company_id => params[:company_id])
+    @user.update_attributes(:password_hash => user_hash, :password_seed => user_seed, :company_id => params[:company_id])
     
     if @user.save
       redirect_to company_users_path(@company)
