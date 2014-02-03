@@ -1,19 +1,31 @@
 class CompaniesController < ApplicationController
   
   def index
-    @companies = Company.all
+    if session[:user_access] == 3 || session[:user_access] == 4
+      @companies = Company.all
+    else
+      access_denied
+    end
   end
   
   def new
-    @company = Company.new
+    if session[:user_access] == 4
+      @company = Company.new
+    else
+      access_denied
+    end
   end
   
   def create
-    @company = Company.new(company_params)
-    if @company.save
-      redirect_to @company
+    if session[:user_access] == 4
+      @company = Company.new(company_params)
+      if @company.save
+        redirect_to @company
+      else
+        render "new"
+      end
     else
-      render "new"
+      access_denied
     end
   end
   
@@ -40,42 +52,53 @@ class CompaniesController < ApplicationController
   end
   
   def edit
-    @company = Company.find(params[:id])
+    if session[:user_access] == 4
+      @company = Company.find(params[:id])
+    else
+      access_denied
+    end
   end
   
   def update
-    @company = Company.find(params[:id])
-    if @company.update(params[:company].permit(
-      :name,
-      :kt,
-      :email,
-      :tel,
-      :mobile,
-      :fax,
-      :contact_name,
-      :comments,
-      :address1,
-      :address2,
-      :postcode,
-      :city,
-      :shipping_address1,
-      :shipping_address2,
-      :shipping_postcode,
-      :shipping_city,
-      :enabled,
-      :comments
-    ))
-      redirect_to @company
+    if session[:user_access] == 4
+      @company = Company.find(params[:id])
+      if @company.update(params[:company].permit(
+        :name,
+        :kt,
+        :email,
+        :tel,
+        :mobile,
+        :fax,
+        :contact_name,
+        :comments,
+        :address1,
+        :address2,
+        :postcode,
+        :city,
+        :shipping_address1,
+        :shipping_address2,
+        :shipping_postcode,
+        :shipping_city,
+        :enabled,
+        :comments
+      ))
+        redirect_to @company
+      else
+        render "edit"
+      end
     else
-      render "edit"
+      access_denied
     end
   end
   
   def destroy
-    @company = Company.find(params[:id])
-    @company.destroy 
-    
-    redirect_to companies_path
+    if session[:user_access] == 4
+      @company = Company.find(params[:id])
+      @company.destroy 
+      redirect_to companies_path
+    else
+      access_denied
+    end
   end
   
   private

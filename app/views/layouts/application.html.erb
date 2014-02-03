@@ -14,7 +14,11 @@
 	
 			<%= nav_bar :brand => "Fluttershy", :responsive => true do %>
 				<%= menu_group do %>
+				<% if session[:user_access] == 2 %>
+					<%= menu_item "My Company", company_path(session[:company_id]) %>
+				<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
 					<%= menu_item "Companies", companies_path %>
+				<% end %>
 				<% end %>
 				<%= menu_group :pull => "right" do %>
 					<%= menu_item session[:user_email] %>

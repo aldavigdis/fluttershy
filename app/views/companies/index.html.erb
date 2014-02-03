@@ -28,11 +28,11 @@
 
 <% end %>
 
+<% if session[:user_access] == 4 %>
 <div class="top-buttons">
-
 	<%= link_to "New Company", new_company_path(), html_options = { class: "btn" } %>
-
 </div>
+<% end %>
 
 <% if @companies.count != 0 %>
 
@@ -78,7 +78,9 @@
 		</td>
 		<td class="buttons">
 			<%= link_to "View", company, class: "btn btn-link view" %>
-			<%= link_to "Edit", edit_company_path(company), class: "btn edit" %>
+			<% if session[:user_access] == 4 %>
+				<%= link_to "Edit", edit_company_path(company), class: "btn edit" %>
+			<% end %>
 		</td>
 	</tr>
 	<% end %>

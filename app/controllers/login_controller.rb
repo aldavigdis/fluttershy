@@ -50,13 +50,17 @@ class LoginController < ApplicationController
       session[:user_fullname] = login_user.fullname
       session[:user_email] = login_user.email
       session[:user_access] = login_user.access
+      session[:company_id] = login_user.company_id
       
       # Check if the user wanted the session to be saved
       if params[:remember]
+        # The password_seed method is used to generate the stored token
         remember_token = password_seed
-        remember_hash = Digest::Whirlpool.hexdigest(remember_token+login_user.password_seed)
+        # The token is stored as a signed cookie
         cookies.permanent.signed[:remember_user_id] = login_user.id
         cookies.permanent.signed[:remember_user_token] = remember_token
+        # The WHIRLPOOL hash of password_seed and the user's password seed is stored in database
+        remember_hash = Digest::Whirlpool.hexdigest(remember_token+login_user.password_seed)
         login_user.update_attributes(:remember_hash => remember_hash)
         login_user.save
       else

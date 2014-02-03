@@ -40,9 +40,13 @@
 		<%= f.password_field :password, :class => "span3" %>
 	</div>
 
-	<div class="control-group password">
+	<div class="control-group access">
 		<%= f.label :access %>
-		<%= f.select :access, options_for_select(@user_access_levels, @user.access), {}, { :class => 'span2' } %>
+		<% if session[:user_access] >= @user.access %>
+		<%= f.select :access, options_for_select(@user_access_levels_available, @user.access), {}, { :class => 'span2' } %>
+		<% else %>
+		<%= @user_access_levels.invert[@user.access] %>
+		<% end %>
 	</div>
 
 	<div class="control-group buttons">

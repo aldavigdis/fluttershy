@@ -42,7 +42,7 @@
 
 	<div class="control-group password">
 		<%= f.label :access %>
-		<%= f.select :access, options_for_select(@user_access_levels), {}, { :class => 'span2' } %>
+		<%= f.select :access, options_for_select(@user_access_levels_available), {}, { :class => 'span2' } %>
 	</div>
 
 	<div class="control-group buttons">
