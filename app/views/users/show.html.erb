@@ -1,0 +1,58 @@
+<header>
+
+	<nav class="row">
+		<ul class="breadcrumb pull-right">
+			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Companies", :controller => "companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to @company.name, @company %> <span class="divider">/</span></li>
+			<li><%= link_to "Users", :action => "index" %></li>
+		</ul>
+	</nav>
+
+	<div class="row">
+	
+		<div class="users-list span9 offset3">
+		
+			<h1><%= @user.fullname %></h1>
+		
+		</div>
+	
+	</div>
+
+</header>
+
+<div class="row">
+	
+	<%= render "shared/company_sidebar" %>
+	
+	<div class="span9 top-buttons">
+		<%= link_to "Edit User", edit_company_user_path(@company, @user), class: "btn edit pull-left" %>
+		<%= link_to "Delete User", company_user_path(@company, @user), method: :delete, data: { confirm: "Are you sure you want to delete this user?" }, class: "btn btn-mini btn-danger delete pull-right" %>
+	</div>
+		
+	<div class="span9">
+		
+		<table class="table">
+			<tbody>
+				<tr>
+					<th span="row">Email</th>
+					<td><%= mail_to @user.email %></td>
+				</tr>
+				<tr>
+					<th span="row">Access Level</th>
+					<td><%= @user_access_levels.invert[@user.access] %></td>
+				</tr>
+				<tr>
+					<th span="row">Last Updated at</th>
+					<td><%= @user.updated_at %></td>
+				</tr>
+				<tr>
+					<th span="row">Created at</th>
+					<td><%= @user.created_at %></td>
+				</tr>
+			</tbody>
+		</table>
+						
+	</div>
+	
+</div>

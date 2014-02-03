@@ -1,0 +1,55 @@
+<header>
+
+	<nav class="row">
+		<ul class="breadcrumb pull-right">
+			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Companies", :controller => "companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to @company.name, @company %> <span class="divider">/</span></li>
+			<li><%= link_to "Users", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to "New User", :action => "index" %></li>
+		</ul>
+	</nav>
+
+	<div class="row">
+	
+		<div class="users-list span9 offset3">
+		
+			<h1>New user for <%= @company.name %></h1>
+		
+		</div>
+	
+	</div>
+
+</header>
+
+<div class="row">
+	
+	<%= form_for [@company, @company.users.build], :html => { :class => "span9 pull-right", :autocomplete => "off" } do |f| %>
+	<div class="control-group fullname">
+		<%= f.label :fullname, "Full Name" %>
+		<%= f.text_field :fullname, :class => "span4" %>
+	</div>
+
+	<div class="control-group email">
+		<%= f.label :email %>
+		<%= f.email_field :email, :class => "span3" %>
+	</div>
+
+	<div class="control-group password">
+		<%= f.label :password %>
+		<%= f.password_field :password, :class => "span3" %>
+	</div>
+
+	<div class="control-group password">
+		<%= f.label :access %>
+		<%= f.select :access, options_for_select(@user_access_levels), {}, { :class => 'span2' } %>
+	</div>
+
+	<div class="control-group buttons">
+		<%= f.submit "Save »", :class => "btn btn-primary" %>
+	</div>
+	<% end %>
+	
+	<%= render "shared/company_sidebar" %>
+		
+</div>
