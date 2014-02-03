@@ -52,6 +52,9 @@ gem "twitter-bootstrap-rails"
 # We're going to use the mysql2 gem
 gem "mysql2"
 
+# And we use WHIRLPOOL for hashing passwords
+gem "digest-whirlpool"
+
 group :development do
   gem "better_errors"
 end
