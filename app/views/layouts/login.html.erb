@@ -9,21 +9,7 @@
 <body>
 	
 	<div class="container-fluid">
-	
-		<header class="row span12">
-	
-			<%= nav_bar :brand => "Fluttershy", :responsive => true do %>
-				<%= menu_group do %>
-					<%= menu_item "Companies", companies_path %>
-				<% end %>
-				<%= menu_group :pull => "right" do %>
-					<%= menu_item session[:user_email] %>
-					<%= menu_item "Log out", logout_path %>
-				<% end %>
-			<% end %>
-	
-		</header>
-	
+		
 		<div class="row span12" id="content-area">
 
 			<%= yield %>

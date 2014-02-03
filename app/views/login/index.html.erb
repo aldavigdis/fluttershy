@@ -1,0 +1,33 @@
+<%= form_tag( nil, { :class => "span4 offset3 well well-large" }) do %>
+
+<h1>Login</h1>
+
+<% if @login_error %>
+<div class="alert">
+	<strong>Error:</strong>
+	<span><%= @login_error %></span>
+</div>
+<% end %>
+
+<div class="control-group">
+	<%= label_tag "email" %>
+	<%= email_field_tag "email", nil, class: "span4" %>
+</div>
+
+<div class="control-group">
+	<%= label_tag "password" %>
+	<%= password_field_tag "password", nil, class: "span4" %>
+</div>
+
+<div class="control-group checkbox">
+	<label>
+		<%= check_box_tag "remember", true %>
+		Remember my login
+	</label>
+</div>
+
+<div class="control-group">
+	<%= submit_tag "Log in", class: "btn btn-primary" %>
+</div>
+
+<% end %>
