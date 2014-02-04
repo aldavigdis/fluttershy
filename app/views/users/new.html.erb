@@ -44,6 +44,13 @@
 		<%= f.label :access %>
 		<%= f.select :access, options_for_select(@user_access_levels_available), {}, { :class => 'span2' } %>
 	</div>
+	
+	<div class="control-group enabled checkbox">
+		<label>
+			<%= f.check_box :enabled %>
+			Account Enabled
+		</label>
+	</div>
 
 	<div class="control-group buttons">
 		<%= f.submit "Save »", :class => "btn btn-primary" %>

@@ -23,10 +23,8 @@
 
 <div class="row">
 	
-	<%= render "shared/company_sidebar" %>
-	
 	<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) && session[:user_access] >= @user.access) || session[:user_access] == 4 %>
-	<div class="span9 top-buttons">
+	<div class="span9 offset3 top-buttons">
 		<%= link_to "Edit User", edit_company_user_path(@company, @user), class: "btn edit pull-left" %>
 		<% if @user.id != session[:user_id] %>
 		<%= link_to "Delete User", company_user_path(@company, @user), method: :delete, data: { confirm: "Are you sure you want to delete this user?" }, class: "btn btn-mini btn-danger delete pull-right" %>
@@ -34,7 +32,7 @@
 	</div>
 	<% end %>
 		
-	<div class="span9">
+	<div class="span9 pull-right">
 		
 		<table class="table">
 			<tbody>
@@ -48,6 +46,16 @@
 				</tr>
 				<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) && session[:user_access] >= @user.access) || session[:user_access] == 4 %>
 				<tr>
+					<th span="row">User Status</th>
+					<td>
+						<% if @user.enabled %>
+						<span class="label label-success">Enabled</span>
+						<% else %>
+						<span class="label label-important">Disabled</span>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
 					<th span="row">Last Updated at</th>
 					<td><%= @user.updated_at %></td>
 				</tr>
@@ -58,7 +66,39 @@
 				<% end %>
 			</tbody>
 		</table>
-						
+		
+		<h2>Recent Login Attempts</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Time and Date</th>
+					<th>IP Address</th>
+					<th>Result</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @user.logins(10).each do |login| %>
+				<tr>
+					<td>
+						<%= login.created_at %>
+					</td>
+					<td>
+						<%= IPAddr.new(login.ip_addr.to_i, Socket::AF_INET6).to_s %>
+					</td>
+					<td>
+						<% if login.success == true %>
+						<span class="label label-success">Successful</span>
+						<% else %>
+						<span class="label label-important">Failed</span>
+						<% end %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		
 	</div>
+	
+	<%= render "shared/company_sidebar" %>
 	
 </div>

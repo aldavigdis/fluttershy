@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :recovery_expires
       t.integer :access
       t.text :comments
-      t.boolean :enabled
+      t.boolean :enabled, default: true
       t.text :remember_hash
       t.references :company, index: true
 
