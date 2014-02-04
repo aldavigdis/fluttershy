@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203111846) do
+ActiveRecord::Schema.define(version: 20140203203637) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20140203111846) do
     t.datetime "updated_at"
   end
 
+  create_table "logins", force: true do |t|
+    t.integer  "user_id"
+    t.text     "useragent"
+    t.binary   "ip_addr"
+    t.boolean  "success"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "logins", ["user_id"], name: "index_logins_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "fullname"
     t.string   "email"
@@ -44,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140203111846) do
     t.datetime "recovery_expires"
     t.integer  "access"
     t.text     "comments"
-    t.boolean  "enabled"
+    t.boolean  "enabled",          default: true
     t.text     "remember_hash"
     t.integer  "company_id"
     t.datetime "created_at"
