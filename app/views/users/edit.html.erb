@@ -48,6 +48,13 @@
 		<%= @user_access_levels.invert[@user.access] %>
 		<% end %>
 	</div>
+	
+	<div class="control-group enabled checkbox">
+		<label>
+			<%= f.check_box :enabled %>
+			Account Enabled
+		</label>
+	</div>
 
 	<div class="control-group buttons">
 		<%= f.submit "Save »", :class => "btn btn-primary" %>

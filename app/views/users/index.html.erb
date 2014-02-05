@@ -44,6 +44,11 @@
 					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
 					<th span="col">Access</th>
 					<% end %>
+					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
+					<th span="col">
+						Status
+					</th>
+					<% end %>
 					<th span="col" class="buttons"></th>
 				</tr>
 			</thead>
@@ -59,6 +64,15 @@
 					</th>
 					<td><%= mail_to user.email %></td>
  					<td><%= @user_access_levels.invert[user.access] %></td>
+					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
+					<td>
+						<% if user.enabled %>
+						<span class="label label-success">Enabled</span>
+						<% else %>
+						<span class="label label-important">Disabled</span>
+						<% end %>
+					</td>
+					<% end %>
 					<% if ((session[:user_access] == 2) && (session[:company_id] == @company.id)) || session[:user_access] == 4 %>
 					<td class="buttons">
 						<%= link_to "View", company_user_path(@company, user), class: "btn btn-link view" %>

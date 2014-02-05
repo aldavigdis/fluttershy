@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       user_hash = password_hash(params[:user]["password"], user_seed)
       
       if session[:user_access] >= params[:user]["access"].to_i
-        @user.update_attributes(:access => params[:user]["access"])
+        @user.update_attributes(:access => params[:user]["access"], :enabled => params[:user]["access"])
         @user.save
       end
       
@@ -64,6 +64,8 @@ class UsersController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @user = User.new(user_params)
+    @user_access_levels = user_access_levels
+    @user_access_levels_available = user_access_levels_available(session[:user_access])
     
     user_seed = password_seed
     user_hash = password_hash(params[:user]["password"], user_seed)
