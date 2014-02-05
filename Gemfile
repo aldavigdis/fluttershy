@@ -57,4 +57,5 @@ gem "digest-whirlpool"
 
 group :development do
   gem "better_errors"
+  gem "faker"
 end
