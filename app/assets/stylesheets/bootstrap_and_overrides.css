@@ -8,6 +8,10 @@
 
 
 /* Main header */
+#main-header { margin-top: 2em; }
+#main-heading a { display: block; width: 300px; height: 100px; margin-bottom: 1em; outline: 1px solid red; }
+.breadcrumb { margin-bottom: 0; }
+
 #content-area .content-header { padding-bottom: 1em; margin-bottom: 1em; }
 
 /* Forms */

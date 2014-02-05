@@ -10,22 +10,29 @@
 	
 	<div class="container-fluid">
 	
-		<header class="row span12">
-	
-			<%= nav_bar :brand => "Fluttershy", :responsive => true do %>
-				<%= menu_group do %>
-				<% if session[:user_access] == 2 %>
+		<header id="main-header" class="row span12">
+			
+			<p id="main-heading"><%= link_to "Fluttershy", root_path %></p>
+			
+			<nav class="row">
+				<ul class="nav nav-tabs span12">
+					<% if session[:user_access] == 0..2 %>
 					<%= menu_item "My Company", company_path(session[:company_id]) %>
-				<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
+					<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
 					<%= menu_item "Companies", companies_path %>
-				<% end %>
-				<% end %>
-				<%= menu_group :pull => "right" do %>
-					<%= menu_item session[:user_email] %>
-					<%= menu_item "Log out", logout_path %>
-				<% end %>
-			<% end %>
-	
+					<% end %>
+					<li class="dropdown pull-right">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<%= session[:user_fullname] %>
+							<i class="caret"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<%= menu_item "Log out", logout_path %>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+				
 		</header>
 	
 		<div class="row span12" id="content-area">
