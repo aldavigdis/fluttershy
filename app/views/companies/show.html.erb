@@ -109,10 +109,10 @@
 				<th span="row">Shipping Address</th>
 				<td>
 					<address>
-						<% if @company.shiping_address1.present? %><span><%= @company.shipping_address1 %></span><br /><% end %>
-						<% if @company.shiping_address1.present? %><span><%= @company.shipping_address2 %></span><br /><% end %>
-						<% if @company.shiping_address1.present? %><span><%= @company.shipping_postcode %></span><% end %>
-						<% if @company.shiping_address1.present? %><span><%= @company.shipping_city %></span><% end %>
+						<% if @company.shipping_address1.present? %><span><%= @company.shipping_address1 %></span><br /><% end %>
+						<% if @company.shipping_address2.present? %><span><%= @company.shipping_address2 %></span><br /><% end %>
+						<% if @company.shipping_postcode.present? %><span><%= @company.shipping_postcode %></span><% end %>
+						<% if @company.shipping_city.present? %><span><%= @company.shipping_city %></span><% end %>
 					</address>
 				</td>
 			</tr>
