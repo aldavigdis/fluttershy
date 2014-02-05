@@ -33,22 +33,15 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company_has_billing_address = false
     @company_has_shipping_address = false
-    if (
-      ( ((@company.address1).nil? || (@company.address1).empty?) == false ) ||
-      ( ((@company.address2).nil? || (@company.address2).empty?) == false ) ||
-      ( ((@company.postcode).nil? || (@company.postcode).empty?) == false ) ||
-      ( ((@company.city).nil? || (@company.city).empty?) == false )
-    )
+    
+    if @company.address1.present? || @company.address2.present? || @company.postcode.present? || @company.city.present?
       @company_has_billing_address = true
     end
-    if (
-      ( ((@company.shipping_address1).nil? || (@company.shipping_address1).empty?) == false ) ||
-      ( ((@company.shipping_address2).nil? || (@company.shipping_address2).empty?) == false ) ||
-      ( ((@company.shipping_postcode).nil? || (@company.shipping_postcode).empty?) == false ) ||
-      ( ((@company.shipping_city).nil? || (@company.shipping_city).empty?) == false )
-    )
+    
+    if @company.shipping_address1.present? || @company.shipping_address2.present? || @company.shipping_postcode.present? || @company.shipping_city.present?
       @company_has_shipping_address = true
     end
+    
   end
   
   def edit
