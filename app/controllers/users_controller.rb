@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   
   def new
     @company = Company.find(params[:company_id])
+    @user = @company.users.build
     if ((session[:user_access] == 2) && (@company.id == session[:company_id])) || session[:user_access] == 4
       @user = User.new
       @user_access_levels = user_access_levels

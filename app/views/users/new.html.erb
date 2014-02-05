@@ -24,7 +24,20 @@
 
 <div class="row">
 	
-	<%= form_for [@company, @company.users.build], :html => { :class => "span9 pull-right", :autocomplete => "off" } do |f| %>
+	<%= form_for @user, :url=>company_users_path(@company), :html => { :class => "span9 pull-right", :autocomplete => "off" } do |f| %>
+	
+	<% if @user.errors.any? %>
+
+	<p><%= pluralize(@user.errors.count, "error", "errors") %> came up when trying to save new user.</p>
+
+	<% @user.errors.full_messages.each do |msg| %>
+	<div class="alert">
+		<%= msg %>
+	</div>
+	<% end %>
+
+	<% end %>
+	
 	<div class="control-group fullname">
 		<%= f.label :fullname, "Full Name" %>
 		<%= f.text_field :fullname, :class => "span4" %>
