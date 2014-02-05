@@ -52,36 +52,25 @@ class CompaniesController < ApplicationController
   end
   
   def edit
-    if session[:user_access] == 4
-      @company = Company.find(params[:id])
+    @company = Company.find(params[:id])
+    if (session[:user_access] == 2 && session[:company_id] == @company.id) || session[:user_access] == 4
     else
       access_denied
     end
   end
   
   def update
+    @company = Company.find(params[:id])
     if session[:user_access] == 4
-      @company = Company.find(params[:id])
-      if @company.update(params[:company].permit(
-        :name,
-        :kt,
-        :email,
-        :tel,
-        :mobile,
-        :fax,
-        :contact_name,
-        :comments,
-        :address1,
-        :address2,
-        :postcode,
-        :city,
-        :shipping_address1,
-        :shipping_address2,
-        :shipping_postcode,
-        :shipping_city,
-        :enabled,
-        :comments
-      ))
+      company_update = @company.update(params[:company].permit(:name, :kt, :email, :tel, :mobile, :fax, :contact_name, :comments, :address1, :address2, :postcode, :city, :shipping_address1, :shipping_address2, :shipping_postcode, :shipping_city, :enabled, :comments))
+      if company_update
+        redirect_to @company
+      else
+        render "edit"
+      end
+    elsif session[:user_access] == 2 && session[:company_id] == @company.id
+      company_update = @company.update(params[:company].permit(:email, :tel, :mobile, :fax, :contact_name, :comments, :address1, :address2, :postcode, :city, :shipping_address1, :shipping_address2, :shipping_postcode, :shipping_city))
+      if company_update
         redirect_to @company
       else
         render "edit"

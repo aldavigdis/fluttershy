@@ -13,8 +13,9 @@
 <%= form_for @company do |f| %>
 
 	<div class="row">
-
-		<div class="span3">
+		
+		<% if session[:user_access] == 4 %>
+		<div class="span3 basic-info">
 			<fieldset>
 				<legend>Basic Information</legend>
 				<div class="control-group name">
@@ -36,6 +37,8 @@
 				</div>
 			</fieldset>
 		</div>
+		<% end %>
+		
 		<div class="span3">
 			<fieldset>
 				<legend>Contact Information</legend>
@@ -90,14 +93,16 @@
 			</fieldset>
 		</div>
 		
-		<div class="span3">
-			<fieldset class="comments">
+		<% if session[:user_access] == 4 %>
+		<div class="span3 comments">
+			<fieldset>
 				<legend>Comments</legend>
 				<div class="control-group">
 					<%= f.text_area :comments, :rows => 16, :class => "span3" %>
 				</div>
 			</fieldset>
 		</div>
+		<% end %>
 		
 	</div>
 	<div class="row">
