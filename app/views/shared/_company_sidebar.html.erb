@@ -5,7 +5,7 @@
 		</li>
 		<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
 		<li>
-			<%= link_to "Users", [@company, :users] %>
+			<%= link_to "Users", company_users_path(@company) %>
 		</li>
 		<% end %>
 	</ul>
