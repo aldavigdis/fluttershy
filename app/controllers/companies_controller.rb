@@ -9,8 +9,8 @@ class CompaniesController < ApplicationController
   end
   
   def new
+    @company = Company.new
     if session[:user_access] == 4
-      @company = Company.new
     else
       access_denied
     end
@@ -55,14 +55,14 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
     if session[:user_access] == 4
+      access_ok = true
       company_update = @company.update(params[:company].permit(:name, :kt, :email, :tel, :mobile, :fax, :contact_name, :comments, :address1, :address2, :postcode, :city, :shipping_address1, :shipping_address2, :shipping_postcode, :shipping_city, :enabled, :comments))
-      if company_update
-        redirect_to @company
-      else
-        render "edit"
-      end
     elsif session[:user_access] == 2 && session[:company_id] == @company.id
+      access_ok = true
       company_update = @company.update(params[:company].permit(:email, :tel, :mobile, :fax, :contact_name, :comments, :address1, :address2, :postcode, :city, :shipping_address1, :shipping_address2, :shipping_postcode, :shipping_city))
+    end
+    
+    if access_ok
       if company_update
         redirect_to @company
       else
@@ -71,13 +71,20 @@ class CompaniesController < ApplicationController
     else
       access_denied
     end
+    
   end
   
   def destroy
+    @company = Company.find(params[:id])
     if session[:user_access] == 4
-      @company = Company.find(params[:id])
-      @company.destroy 
-      redirect_to companies_path
+      if @company.id == session[:company_id]
+        @companies = Company.all
+        @error = "You cannot erase your own company"
+        redirect_to companies_path
+      else
+        @company.destroy 
+        redirect_to companies_path
+      end
     else
       access_denied
     end
