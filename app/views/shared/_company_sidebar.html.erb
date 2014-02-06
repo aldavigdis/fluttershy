@@ -1,7 +1,8 @@
-<nav class="span3 pull-left" id="company-show-sidebar">
+<nav class="" id="company-show-sidebar">
+	
 	<ul class="nav nav-tabs nav-stacked">
 		<li>
-			<%= link_to "Account info", @company%>
+			<%= link_to "Company info", @company%>
 		</li>
 		<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
 		<li>
@@ -9,4 +10,13 @@
 		</li>
 		<% end %>
 	</ul>
+	
+	<% if session[:user_access] == 4 %>
+	<ul class="nav nav-tabs nav-stacked">
+		<li>
+			<%= link_to "Back to companies", companies_path%>
+		</li>
+	</ul>
+	<% end %>
+	
 </nav>

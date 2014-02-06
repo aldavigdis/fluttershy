@@ -14,120 +14,130 @@
 
 	<div class="row">
 	
-		<div class="span9 offset3">
+		<div class="span8">
 		
 			<h1><%= @company.name %></h1>
 		
 		</div>
+		
+		<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) || session[:user_access] == 4) %>
+		<div class="span8 top-buttons">
+			<%= link_to "Edit Account", edit_company_path(@company), class: "btn edit pull-left" %>
+			<% if session[:user_access] == 4 %>
+			<% if @company.id != session[:company_id] %>
+			<%= link_to "Delete Account", company_path(@company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-mini btn-danger delete pull-right" %>
+			<% end %>
+			<% end %>
+		</div>
+		<% end %>
 	
 	</div>
 
 </header>
 
-<% if @company.enabled == false %>
-<div class="alert alert-error">
-	<span>This account is disabled.</span>
-</div>
-<% end %>
-
 <div class="row">
 	
-	<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) || session[:user_access] == 4) %>
-	<div class="span9 top-buttons offset3">
-		<%= link_to "Edit Account", edit_company_path(@company), class: "btn edit pull-left" %>
-		<% if session[:user_access] == 4 %>
-		<%= link_to "Delete Account", company_path(@company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-mini btn-danger delete pull-right" %>
+	<div class="span8">
+		<% if @company.enabled == false %>
+		<div class="alert alert-error">
+			<span>This account is disabled.</span>
+		</div>
 		<% end %>
-	</div>
-	<% end %>
+
+		<div class="row">
 	
-	<div class="basic-info span9 pull-right">
-		<table class="table">
-			<% if @company.kt.present? %>
-			<tr class="kt">
-				<th span="row" class="span3">Kt</th>
-				<td><a href="https://www.rsk.is/fyrirtaekjaskra/leit/kennitala/<%= @company.kt %>"><%= @company.kt %></a></td>
-			</tr>
-			<% end %>
-			<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
-			<tr>
-				<th span="row" class="span3">Account Status</th>
-				<td>
-					<% if @company.enabled %>
-					<span class="label label-success">Enabled</span>
-					<% else %>
-					<span class="label label-important">Disabled</span>
+			<div class="basic-info span8">
+				<table class="table table-bordered">
+					<% if @company.kt.present? %>
+					<tr class="kt">
+						<th span="row" class="span3">Kt</th>
+						<td><a href="https://www.rsk.is/fyrirtaekjaskra/leit/kennitala/<%= @company.kt %>"><%= @company.kt %></a></td>
+					</tr>
 					<% end %>
-				</td>
-			</tr>
-			<% end %>
-			<% if @company.contact_name.present? %>
-			<tr class="contact-name">
-				<th span="row" class="span3">Contact Name</th>
-				<td><%= @company.contact_name %></td>
-			</tr>
-			<% end %>
-			<% if @company.email.present? %>
-			<tr class="email">
-				<th span="row" class="span3">Email</th>
-				<td><%= mail_to @company.email %></td>
-			</tr>
-			<% end %>
-			<% if @company.tel.present? %>
-			<tr class="tel">
-				<th span="row" class="span3">Telephone</th>
-				<td><a href="tel:<%= @company.tel %>"><%= @company.tel %></a></td>
-			</tr>
-			<% end %>
-			<% if @company.mobile.present? %>
-			<tr class="mobile">
-				<th span="row" class="span3">Mobile Phone</th>
-				<td><a href="tel:<%= @company.mobile %>"><%= @company.mobile %></a></td>
-			</tr>
-			<% end %>
-			<% if @company.fax.present? %>
-			<tr class="fax">
-				<th span="row" class="span3">Fax</th>
-				<td><a href="fax:<%= @company.fax %>"><%= @company.fax %></a></td>
-			</tr>
-			<% end %>
-			<% if @company_has_billing_address %>
-			<tr class="billing-address">
-				<th span="row" class="span3">Billing Address</th>
-				<td>
-					<address>
-						<% if @company.address1.present? %><span><%= @company.address1 %></span><br /><% end %>
-						<% if @company.address2.present? %><span><%= @company.address2 %></span><br /><% end %>
-						<% if @company.postcode.present? %><span><%= @company.postcode %></span><% end %>
-						<% if @company.city.present? %><span><%= @company.city %></span><% end %>
-					</address>
-				</td>
-			</tr>
-			<% end %>
-			<% if @company_has_shipping_address %>
-			<tr class="shipping">
-				<th span="row">Shipping Address</th>
-				<td>
-					<address>
-						<% if @company.shipping_address1.present? %><span><%= @company.shipping_address1 %></span><br /><% end %>
-						<% if @company.shipping_address2.present? %><span><%= @company.shipping_address2 %></span><br /><% end %>
-						<% if @company.shipping_postcode.present? %><span><%= @company.shipping_postcode %></span><% end %>
-						<% if @company.shipping_city.present? %><span><%= @company.shipping_city %></span><% end %>
-					</address>
-				</td>
-			</tr>
-			<% end %>
-			<% if @company.comments.present? %>
-			<tr>
-				<th span="row">Comments</th>
-				<td>
-					<%= @company.comments %>
-				</td>
-			</tr>
-			<% end %>
-		</table>
+					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
+					<tr>
+						<th span="row" class="span3">Account Status</th>
+						<td>
+							<% if @company.enabled %>
+							<span class="label label-success">Enabled</span>
+							<% else %>
+							<span class="label label-important">Disabled</span>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>
+					<% if @company.contact_name.present? %>
+					<tr class="contact-name">
+						<th span="row" class="span3">Contact Name</th>
+						<td><%= @company.contact_name %></td>
+					</tr>
+					<% end %>
+					<% if @company.email.present? %>
+					<tr class="email">
+						<th span="row" class="span3">Email</th>
+						<td><%= mail_to @company.email %></td>
+					</tr>
+					<% end %>
+					<% if @company.tel.present? %>
+					<tr class="tel">
+						<th span="row" class="span3">Telephone</th>
+						<td><a href="tel:<%= @company.tel %>"><%= @company.tel %></a></td>
+					</tr>
+					<% end %>
+					<% if @company.mobile.present? %>
+					<tr class="mobile">
+						<th span="row" class="span3">Mobile Phone</th>
+						<td><a href="tel:<%= @company.mobile %>"><%= @company.mobile %></a></td>
+					</tr>
+					<% end %>
+					<% if @company.fax.present? %>
+					<tr class="fax">
+						<th span="row" class="span3">Fax</th>
+						<td><a href="fax:<%= @company.fax %>"><%= @company.fax %></a></td>
+					</tr>
+					<% end %>
+					<% if @company_has_billing_address %>
+					<tr class="billing-address">
+						<th span="row" class="span3">Billing Address</th>
+						<td>
+							<address>
+								<% if @company.address1.present? %><span><%= @company.address1 %></span><br /><% end %>
+								<% if @company.address2.present? %><span><%= @company.address2 %></span><br /><% end %>
+								<% if @company.postcode.present? %><span><%= @company.postcode %></span><% end %>
+								<% if @company.city.present? %><span><%= @company.city %></span><% end %>
+							</address>
+						</td>
+					</tr>
+					<% end %>
+					<% if @company_has_shipping_address %>
+					<tr class="shipping">
+						<th span="row">Shipping Address</th>
+						<td>
+							<address>
+								<% if @company.shipping_address1.present? %><span><%= @company.shipping_address1 %></span><br /><% end %>
+								<% if @company.shipping_address2.present? %><span><%= @company.shipping_address2 %></span><br /><% end %>
+								<% if @company.shipping_postcode.present? %><span><%= @company.shipping_postcode %></span><% end %>
+								<% if @company.shipping_city.present? %><span><%= @company.shipping_city %></span><% end %>
+							</address>
+						</td>
+					</tr>
+					<% end %>
+					<% if @company.comments.present? %>
+					<tr>
+						<th span="row">Comments</th>
+						<td>
+							<%= @company.comments %>
+						</td>
+					</tr>
+					<% end %>
+				</table>
+			</div>
+			
+		</div>
 	</div>
 	
-	<%= render "shared/company_sidebar" %>
-		
+	<div class="span4 pull-right">
+		<%= render "shared/company_sidebar" %>
+	</div>
+	
 </div>

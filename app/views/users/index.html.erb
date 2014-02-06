@@ -11,11 +11,17 @@
 
 	<div class="row">
 	
-		<div class="users-list span9 offset3">
+		<div class="users-list span8">
 		
 			<h1>Users assigned to <%= @company.name %></h1>
 		
 		</div>
+		
+		<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
+		<div class="top-buttons span9">
+			<%= link_to "New User", new_company_user_path(), html_options = { class: "btn" } %>
+		</div>
+		<% end %>
 	
 	</div>
 
@@ -23,13 +29,68 @@
 
 <div class="row">
 	
-	<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
-	<div class="top-buttons span9 offset3">
-		<%= link_to "New User", new_company_user_path(), html_options = { class: "btn" } %>
+	<div class="span8">
+		
+		<% if @company.users.size == 0 %>
+		<div class="alert">
+			<span>No users are assigned to this company. Self-service will not work.</span>
+		</div>
+		<% else %>
+		<table class="table table-responsive table-striped table-hover table-bordered" id="table-company-users">
+			<thead>
+				<tr>
+					<th span="col" class="fullname">Full name</th>
+					<th span="col" class="email">Email</th>
+					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
+					<th span="col" class="access">Access</th>
+					<% end %>
+					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
+					<th span="col" class="status">
+						Status
+					</th>
+					<% end %>
+				</tr>
+			</thead>
+			<tbody>
+				<% @company.users.each do |user| %>
+				<tr>
+					<th span="row">
+						<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
+						<%= link_to user.fullname, company_user_path(@company, user) %>
+						<% else %>
+						<%= user.fullname %>
+						<% end %>
+					</th>
+					<td class="email"><%= mail_to user.email %></td>
+ 					<td class="access"><%= @user_access_levels.invert[user.access] %></td>
+					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
+					<td>
+						<% if user.enabled %>
+						<span class="label label-success">Enabled</span>
+						<% else %>
+						<span class="label label-important">Disabled</span>
+						<% end %>
+					</td>
+					<% end %>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% end %>
+		
 	</div>
-	<% end %>
 	
-	<div class="span9 pull-right">
+	<div class="span4 pull-right">
+		<%= render "shared/company_sidebar" %>
+	</div>
+	
+</div>
+
+<!--
+
+<div class="row">
+	
+	<div class="span9">
 		
 		<% if @company.users.size == 0 %>
 		<div class="alert">
@@ -80,6 +141,6 @@
 						
 	</div>
 	
-	<%= render "shared/company_sidebar" %>
-	
 </div>
+
+-->

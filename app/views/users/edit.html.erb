@@ -12,15 +12,78 @@
 
 	<div class="row">
 	
-		<div class="users-list span9 offset3">
+		<div class="users-list span8">
 		
-			<h1>Edit</h1>
+			<h1>Edit User</h1>
 		
 		</div>
 	
 	</div>
 
 </header>
+
+<div class="row">
+	
+	<div class="span8">
+		
+		<% if @user.errors.any? %>
+
+		<p><%= pluralize(@user.errors.count, "error", "errors") %> came up when trying to save new user.</p>
+
+		<% @user.errors.full_messages.each do |msg| %>
+		<div class="alert">
+			<%= msg %>
+		</div>
+		<% end %>
+
+		<% end %>
+		
+		<%= form_for [@company, @user], :html => { :class => "", :autocomplete => "off" } do |f| %>
+		<div class="control-group fullname">
+			<%= f.label :fullname, "Full Name" %>
+			<%= f.text_field :fullname, :class => "span4" %>
+		</div>
+
+		<div class="control-group email">
+			<%= f.label :email %>
+			<%= f.email_field :email, :class => "span3" %>
+		</div>
+
+		<div class="control-group password">
+			<%= f.label :password %>
+			<%= f.password_field :password, :class => "span3" %>
+		</div>
+
+		<div class="control-group access">
+			<%= f.label :access %>
+			<% if session[:user_access] >= @user.access %>
+			<%= f.select :access, options_for_select(@user_access_levels_available, @user.access), {}, { :class => 'span2' } %>
+			<% else %>
+			<%= @user_access_levels.invert[@user.access] %>
+			<% end %>
+		</div>
+	
+		<div class="control-group enabled checkbox">
+			<label>
+				<%= f.check_box :enabled %>
+				Account Enabled
+			</label>
+		</div>
+
+		<div class="control-group buttons">
+			<%= f.submit "Save »", :class => "btn btn-primary" %>
+		</div>
+		<% end %>
+		
+	</div>
+	
+	<div class="span4 pull-right">
+		<%= render "shared/company_sidebar" %>
+	</div>
+	
+</div>
+
+<!--
 
 <div class="row">
 	
@@ -64,3 +127,4 @@
 	<%= render "shared/company_sidebar" %>
 		
 </div>
+-->

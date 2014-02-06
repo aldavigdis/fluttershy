@@ -8,8 +8,24 @@
 		</ul>
 	</nav>
 
-	<h1 class="span6">New company</h1>
+	<h1 class="span9">New company</h1>
 
 </div>
 
-<%= render "form" %>
+<div class="row">
+	
+	<div class="span8">
+		<%= render "form" %>
+	</div>
+	
+	<div class="span4 pull-right">
+		<nav class="" id="company-show-sidebar">
+			<ul class="nav nav-tabs nav-stacked">
+				<li>
+					<%= link_to "Back to companies", companies_path%>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	
+</div>

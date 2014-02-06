@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def new
     @company = Company.find(params[:company_id])
     @user = @company.users.build
+    @user.enabled = true
     if ((session[:user_access] == 2) && (@company.id == session[:company_id])) || session[:user_access] == 4
       @user_access_levels = user_access_levels
       @user_access_levels_available = user_access_levels_available(session[:user_access])
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
         @user.save
       end
       
-      if @user.update(params[:user].permit(:fullname, :email))
+      if @user.update(params[:user].permit(:fullname, :email, :enabled))
         redirect_to company_users_path(@company)
       else
         render "edit"
