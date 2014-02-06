@@ -11,15 +11,24 @@
 #content-area th[span=row] { padding-right: 1em; }
 #content-area #new_company table .buttons { text-align: right; width: 150px; }
 
+table .email { width: 6em; }
+table .billing-address { width: 15em; }
+table .buttons { width: 115px; }
+
 // Sidebar
 // #company-show-sidebar { margin-top: 60px; }
 
+@media (max-width: 1199px) {
+	#table-companies .billing-address { display: none; }
+}
+
 @media (min-width: 768px) {
 	.breadcrumb { text-align: right; background-color: transparent; }
+	table td, table th { width: auto !important; }
 }
 
 @media (max-width: 767px) {
-	#table-companies .contact-name, #table-companies .billing-address { display: none; }
+	#table-companies .telephone, #table-companies .contact-name, #table-companies .billing-address { display: none; }
 	#content-area .content-header { padding-bottom: 0; margin-bottom: 0; }
 	#content-area textarea#company_comments { height: 4em; }
 	#company-show-sidebar { margin-top: 1em; }
@@ -28,4 +37,6 @@
 @media (max-width: 480px) {
 	#table-companies thead, #table-companies .email, #table-companies .telephone { display: none; }
 	#table-companies { margin-top: 2em; }
+	#table-companies a { display: block; }
+	#table-company-users .email, #table-company-users .access { display: none; }
 }
