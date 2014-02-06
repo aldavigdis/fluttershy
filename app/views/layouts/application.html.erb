@@ -15,8 +15,8 @@
 			
 			<p id="main-heading"><%= link_to "Fluttershy", root_path %></p>
 			
-			<nav class="row">
-				<ul class="nav nav-tabs span12">
+			<nav class="">
+				<ul class="nav nav-tabs">
 					<% if session[:user_access] == 0..2 %>
 					<%= menu_item "My Company", company_path(session[:company_id]) %>
 					<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
