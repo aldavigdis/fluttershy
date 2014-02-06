@@ -6,14 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Tell Faker we're going to use the Icelandic locale. It falls back on en-US anyway
 Faker::Config.locale = "is"
 
+# Initialize companies
 company_arr = Array.new
-
 for i in 0..200
   company_arr.push({ name: Faker::Company.name, kt: "0000000000", email: Faker::Internet.email, tel: Faker::PhoneNumber.phone_number, mobile: Faker::PhoneNumber.cell_phone, contact_name: Faker::Name.name, address1: Faker::Address.street_name+' '+rand(1-110).to_s, address2: Faker::Address.secondary_address, postcode: rand(101-903).to_s, city: Faker::Address.city })
 end
-
 companies = Company.create(company_arr)
 
 User.new(fullname: "Superadmin User", email: "superadmin@localhost", password_hash: "680bd0033d5fbd52e8b5ead7bbf6147e4fb26e17e29e5b8a535c592a6313b011dfee9f67d5bf2fba7c775a48993ec80428df20a058767e262b443924c6ca10ad", password_seed: "1xu7lv78gxgl8z13jggqi7n15cgbafnrzcjzgfcqjgc5xgv4d", access: 4, company_id: 1).save(validate: false)
