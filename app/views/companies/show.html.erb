@@ -2,9 +2,9 @@
 
 	<nav class="row">
 		<ul class="breadcrumb">
-			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Home", "/" %></li>
 			<% if session[:user_access] == 3 || session[:user_access] == 4 %>
-			<li><%= link_to "Companies", :controller => "companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
 			<li><%= link_to @company.name, @company %></li>
 			<% else %>
 			<li><%= link_to "My Company", @company %></li>
@@ -14,15 +14,15 @@
 
 	<div class="row">
 	
-		<div class="span8">
+		<div class="col-md-8">
 		
 			<h1><%= @company.name %></h1>
 		
 		</div>
 		
 		<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) || session[:user_access] == 4) %>
-		<div class="span8 top-buttons">
-			<%= link_to "Edit Account", edit_company_path(@company), class: "btn edit pull-left" %>
+		<div class="col-md-8 top-buttons">
+			<%= link_to "Edit Account", edit_company_path(@company), class: "btn btn-default edit" %>
 			<% if session[:user_access] == 4 %>
 			<% if @company.id != session[:company_id] %>
 			<%= link_to "Delete Account", company_path(@company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-mini btn-danger delete pull-right" %>
@@ -37,68 +37,68 @@
 
 <div class="row">
 	
-	<div class="span8">
+	<div class="col-md-8">
 		<% if @company.enabled == false %>
-		<div class="alert alert-error">
+		<div class="alert alert-warning">
 			<span>This account is disabled.</span>
 		</div>
 		<% end %>
 
 		<div class="row">
 	
-			<div class="basic-info span8">
+			<div class="basic-info col-md-12">
 				<table class="table table-bordered">
 					<% if @company.kt.present? %>
 					<tr class="kt">
-						<th span="row" class="span3">Kt</th>
+						<th span="row">Kt</th>
 						<td><a href="https://www.rsk.is/fyrirtaekjaskra/leit/kennitala/<%= @company.kt %>"><%= @company.kt %></a></td>
 					</tr>
 					<% end %>
 					<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
 					<tr>
-						<th span="row" class="span3">Account Status</th>
+						<th span="row">Account Status</th>
 						<td>
 							<% if @company.enabled %>
 							<span class="label label-success">Enabled</span>
 							<% else %>
-							<span class="label label-important">Disabled</span>
+							<span class="label label-danger">Disabled</span>
 							<% end %>
 						</td>
 					</tr>
 					<% end %>
 					<% if @company.contact_name.present? %>
 					<tr class="contact-name">
-						<th span="row" class="span3">Contact Name</th>
+						<th span="row">Contact Name</th>
 						<td><%= @company.contact_name %></td>
 					</tr>
 					<% end %>
 					<% if @company.email.present? %>
 					<tr class="email">
-						<th span="row" class="span3">Email</th>
+						<th span="row">Email</th>
 						<td><%= mail_to @company.email %></td>
 					</tr>
 					<% end %>
 					<% if @company.tel.present? %>
 					<tr class="tel">
-						<th span="row" class="span3">Telephone</th>
+						<th span="row">Telephone</th>
 						<td><a href="tel:<%= @company.tel %>"><%= @company.tel %></a></td>
 					</tr>
 					<% end %>
 					<% if @company.mobile.present? %>
 					<tr class="mobile">
-						<th span="row" class="span3">Mobile Phone</th>
+						<th span="row">Mobile Phone</th>
 						<td><a href="tel:<%= @company.mobile %>"><%= @company.mobile %></a></td>
 					</tr>
 					<% end %>
 					<% if @company.fax.present? %>
 					<tr class="fax">
-						<th span="row" class="span3">Fax</th>
+						<th span="row">Fax</th>
 						<td><a href="fax:<%= @company.fax %>"><%= @company.fax %></a></td>
 					</tr>
 					<% end %>
 					<% if @company_has_billing_address %>
 					<tr class="billing-address">
-						<th span="row" class="span3">Billing Address</th>
+						<th span="row">Billing Address</th>
 						<td>
 							<address>
 								<% if @company.address1.present? %><span><%= @company.address1 %></span><br /><% end %>
@@ -136,7 +136,7 @@
 		</div>
 	</div>
 	
-	<div class="span4 pull-right">
+	<div class="col-md-4 pull-right">
 		<%= render "shared/company_sidebar" %>
 	</div>
 	

@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   
   def index
     if session[:user_access] == 3 || session[:user_access] == 4
-      @companies = Company.all
+      @companies = Company.paginate(:page => params[:page])
     else
       access_denied
     end

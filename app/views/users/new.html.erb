@@ -2,17 +2,17 @@
 
 	<nav class="row">
 		<ul class="breadcrumb pull-right">
-			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
-			<li><%= link_to "Companies", :controller => "companies", :action => "index" %> <span class="divider">/</span></li>
-			<li><%= link_to @company.name, @company %> <span class="divider">/</span></li>
-			<li><%= link_to "Users", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to "Home", "/" %></li>
+			<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
+			<li><%= link_to @company.name, @company %> </li>
+			<li><%= link_to "Users", :action => "index" %></li>
 			<li><%= link_to "New User", :action => "index" %></li>
 		</ul>
 	</nav>
 
 	<div class="row">
 	
-		<div class="users-list span8">
+		<div class="users-list col-md-8">
 		
 			<h1>New user for <%= @company.name %></h1>
 		
@@ -24,81 +24,59 @@
 
 <div class="row">
 	
-	<div class="span8">
+	<div class="col-md-8">
 		
 		<% if @user.errors.any? %>
 
 		<p><%= pluralize(@user.errors.count, "error", "errors") %> came up when trying to save new user.</p>
 
 		<% @user.errors.full_messages.each do |msg| %>
-		<div class="alert">
+		<div class="alert alert-warning">
 			<%= msg %>
 		</div>
 		<% end %>
 
 		<% end %>
 		
-		<%= render "form" %>
+		<%= form_for @user, :url=>company_users_path(@company), :html => { :class => "", :autocomplete => "off" } do |f| %>
+		
+		<div class="form-group fullname">
+			<%= f.label :fullname, "Full Name" %>
+			<%= f.text_field :fullname, :class => "form-control" %>
+		</div>
+		
+		<div class="form-group email">
+			<%= f.label :email %>
+			<%= f.email_field :email, :class => "form-control" %>
+		</div>
+		
+		<div class="form-group password">
+			<%= f.label :password %>
+			<%= f.password_field :password, :class => "form-control" %>
+		</div>
+		
+		<div class="form-group access">
+			<%= f.label :access %>
+			<%= f.select :access, options_for_select(@user_access_levels_available), {}, { :class => "form-control" } %>
+		</div>
+		
+		<div class="form-group enabled checkbox">
+			<label>
+				<%= f.check_box :enabled %>
+				Account Enabled
+			</label>
+		</div>
+		
+		<div class="control-group buttons">
+			<%= f.submit "Save »", :class => "btn btn-primary" %>
+		</div>
+		
+		<% end %>
 		
 	</div>
 	
-	<div class="span4 pull-right">
+	<div class="col-md-4 pull-right">
 		<%= render "shared/company_sidebar" %>
 	</div>
 	
 </div>
-
-<!--
-
-<div class="row">
-	
-	<%= form_for @user, :url=>company_users_path(@company), :html => { :class => "span9 pull-right", :autocomplete => "off" } do |f| %>
-	
-	<% if @user.errors.any? %>
-
-	<p><%= pluralize(@user.errors.count, "error", "errors") %> came up when trying to save new user.</p>
-
-	<% @user.errors.full_messages.each do |msg| %>
-	<div class="alert">
-		<%= msg %>
-	</div>
-	<% end %>
-
-	<% end %>
-	
-	<div class="control-group fullname">
-		<%= f.label :fullname, "Full Name" %>
-		<%= f.text_field :fullname, :class => "span4" %>
-	</div>
-
-	<div class="control-group email">
-		<%= f.label :email %>
-		<%= f.email_field :email, :class => "span3" %>
-	</div>
-
-	<div class="control-group password">
-		<%= f.label :password %>
-		<%= f.password_field :password, :class => "span3" %>
-	</div>
-
-	<div class="control-group password">
-		<%= f.label :access %>
-		<%= f.select :access, options_for_select(@user_access_levels_available), {}, { :class => 'span2' } %>
-	</div>
-	
-	<div class="control-group enabled checkbox">
-		<label>
-			<%= f.check_box :enabled %>
-			Account Enabled
-		</label>
-	</div>
-
-	<div class="control-group buttons">
-		<%= f.submit "Save »", :class => "btn btn-primary" %>
-	</div>
-	<% end %>
-	
-	<%= render "shared/company_sidebar" %>
-		
-</div>
--->

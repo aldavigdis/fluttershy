@@ -44,10 +44,8 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# Add support for twitter-bootstrap-rails. Read more: https://github.com/seyhunak/twitter-bootstrap-rails
-gem "therubyracer"
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
+# SASS-Rails and Bootstrap-sass
+gem 'bootstrap-sass', '~> 3.1.0'
 
 # We're going to use the mysql2 gem
 gem "mysql2"
@@ -55,7 +53,13 @@ gem "mysql2"
 # And we use WHIRLPOOL for hashing passwords
 gem "digest-whirlpool"
 
-group :development do
-  gem "better_errors"
-  gem "faker"
-end
+# The Pagination Gem
+gem 'will_paginate', '~> 3.0'
+
+gem "will_paginate-bootstrap"
+
+# Faker to pull in random data on seed
+gem "faker", group: [:development, :test]
+
+gem "better_errors", group: [:development, :test]
+

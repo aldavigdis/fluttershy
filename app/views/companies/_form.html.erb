@@ -1,92 +1,110 @@
+<%= form_for @company do |f| %>
+
+<div class="col-md-8">
+	
 	<% if @company.errors.any? %>
 
-	<p><%= pluralize(@company.errors.count, "error", "errors") %> came up when trying to save new company.</p>
+	<p><%= pluralize(@company.errors.count, "error", "errors") %> came up when trying to save new user.</p>
 
 	<% @company.errors.full_messages.each do |msg| %>
-	<div class="alert">
+	<div class="alert alert-warning">
 		<%= msg %>
 	</div>
 	<% end %>
 
 	<% end %>
-
-	<%= form_for @company do |f| %>
+	
 	<% if session[:user_access] == 4 %>
-	<fieldset class="">
+	<fieldset>
 		<legend>Basic Information</legend>
-		<div class="control-group name">
+		<div class="form-group name">
 			<%= f.label :name %>
-			<%= f.text_field :name, :class => "span4" %>
+			<%= f.text_field :name, :class => "form-control" %>
 		</div>
-		<div class="control-group kennitala">
+		<div class="form-group kennitala">
 			<%= f.label :kt, "Kennitala" %>
-			<%= f.text_field :kt, :class => "span2" %>
+			<%= f.text_field :kt, :class => "form-control" %>
 		</div>
-		<div class="control-group checkbox enabled">
-			<label>
+		<div class="form-group checkbox enabled">
+			<label class="checkbox-inline">
 				<%= f.check_box :enabled %>
 				Account enabled
 			</label>
 		</div>
 	</fieldset>
 	<% end %>
+	
 	<fieldset class="">
 		<legend>Contact Information</legend>
-		<div class="control-group contact-name">
+		<div class="form-group contact-name">
 			<%= f.label :contact_name, "Contact Name" %>
-			<%= f.text_field :contact_name, :class => "span4" %>
+			<%= f.text_field :contact_name, :class => "form-control" %>
 		</div>
-		<div class="control-group email">
+		<div class="form-group email">
 			<%= f.label :email %>
-			<%= f.email_field :email, :class => "span4" %>
+			<%= f.email_field :email, :class => "form-control" %>
 		</div>
-		<div class="control-group phone">
+		<div class="form-group phone">
 			<%= f.label :tel, "Phone" %>
-			<%= f.telephone_field :tel, :class => "span4" %>
+			<%= f.telephone_field :tel, :class => "form-control" %>
 		</div>
-		<div class="control-group mobile">
+		<div class="form-group mobile">
 			<%= f.label :mobile, "Mobile Phone" %>
-			<%= f.telephone_field :mobile, :class => "span4" %>
+			<%= f.telephone_field :mobile, :class => "form-control" %>
 		</div>
-		<div class="control-group fax">
+		<div class="form-group fax">
 			<%= f.label :fax, "Fax" %>
-			<%= f.telephone_field :fax, :class => "span4" %>
+			<%= f.telephone_field :fax, :class => "form-control" %>
 		</div>
 	</fieldset>
-	<fieldset class="">
+	
+	<fieldset>
 		<legend>Addresses</legend>
-		<div class="control-group">
+		<div class="form-group">
 			<%= f.label :address1, "Billing Address" %>
-			<%= f.text_field :address1, :placeholder => "Line 1", :class => "span4" %>
+			<%= f.text_field :address1, :placeholder => "Line 1", :class => "form-control" %>
 		</div>
-		<div class="control-group">
-			<%= f.text_field :address2, :placeholder => "Line 2", :class => "span4" %>
+		<div class="form-group">
+			<%= f.text_field :address2, :placeholder => "Line 2", :class => "form-control" %>
 		</div>
-		<div class="control-group">
-			<%= f.text_field :postcode, :placeholder => "Postcode", :class => "span1" %>
-			<%= f.text_field :city, :placeholder => "City", :class => "span3" %>
+		<div class="row">
+		<div class="form-group col-xs-4">
+			<%= f.text_field :postcode, :placeholder => "Postcode", :class => "form-control" %>
 		</div>
-		<div class="control-group">
+		<div class="form-group col-xs-8">
+			<%= f.text_field :city, :placeholder => "City", :class => "form-control" %>
+		</div>
+		</div>
+		<div class="form-group">
 			<%= f.label :shipping_address1, "Shipping Address" %>
-			<%= f.text_field :shipping_address1, :placeholder => "Line 1", :class => "span4" %>
+			<%= f.text_field :shipping_address1, :placeholder => "Line 1", :class => "form-control" %>
 		</div>
-		<div class="control-group">
-			<%= f.text_field :shipping_address2, :placeholder => "Line 2", :class => "span4" %>
+		<div class="form-group">
+			<%= f.text_field :shipping_address2, :placeholder => "Line 2", :class => "form-control" %>
 		</div>
-		<div class="control-group">
-			<%= f.text_field :shipping_postcode, :placeholder => "Postcode", :class => "span1" %>
-			<%= f.text_field :shipping_city, :placeholder => "City", :class => "span3" %>
+		<div class="row">
+		<div class="form-group col-xs-4">
+			<%= f.text_field :shipping_postcode, :placeholder => "Postcode", :class => "form-control" %>
+		</div>
+		<div class="form-group col-xs-8">
+			<%= f.text_field :shipping_city, :placeholder => "City", :class => "form-control" %>
+		</div>
 		</div>
 	</fieldset>
+	
 	<% if session[:user_access] == 4 %>
 	<fieldset class="">
 		<legend>Comments</legend>
-		<div class="control-group">
-			<%= f.text_area :comments, :rows => 6, :class => "span4" %>
+		<div class="form-group">
+			<%= f.text_area :comments, :rows => 6, :class => "form-control" %>
 		</div>
 	</fieldset>
 	<% end %>
-	<div class="">
+	
+	<div class="form-group">
 		<%= f.submit "Save", :class => "btn btn-primary" %>
 	</div>
+	
+</div>
+
 <% end %>

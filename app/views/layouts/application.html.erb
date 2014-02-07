@@ -9,18 +9,20 @@
 </head>
 <body>
 	
-	<div class="container-fluid">
-	
-		<header id="main-header" class="row span12">
+	<div class="container">
+		
+		<header id="main-header" class="">
 			
-			<p id="main-heading"><%= link_to "Fluttershy", root_path %></p>
+			<div id="main-heading" class"col-md-12">
+				<%= link_to "Fluttershy", root_path %>
+			</div>
 			
 			<nav class="">
 				<ul class="nav nav-tabs">
 					<% if session[:user_access] == 0..2 %>
-					<%= menu_item "My Company", company_path(session[:company_id]) %>
+					<li class="active"><a href="<%= company_path(session[:company_id]) %>">My Company</a></li>
 					<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
-					<%= menu_item "Companies", companies_path %>
+					<li><a href="<%= companies_path %>">Companies</a></li>
 					<% end %>
 					<li class="dropdown pull-right">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -28,20 +30,16 @@
 							<i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<%= menu_item "Log out", logout_path %>
+							<li><a href="<%= logout_path %>">Log out</a></li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 				
 		</header>
-	
-		<div class="row span12" id="content-area">
-
-			<%= yield %>
-	
-		</div>
-	
+		
+		<%= yield %>
+		
 	</div>
 
 </body>

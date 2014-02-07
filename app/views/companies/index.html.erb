@@ -1,88 +1,88 @@
-<header>
+<header class="row">
 
-	<nav class="row">
+	<nav>
 		<ul class="breadcrumb">
-			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
+			<li><%= link_to "Home", "/" %></li>
 			<li><%= link_to "Companies", :action => "index" %></li>
 		</ul>
 	</nav>
-
-	<div class="row">
 	
-		<div class="span8">
-		
-			<h1>Companies</h1>
-		
-		</div>
+	<div class="col-md-12">
 	
+		<h1>Companies</h1>
+		
 	</div>
-
+	
 </header>
 
 <div class="row">
 
-<% if @companies.count == 0 %>
+	<% if @companies.count == 0 %>
 
-<div class="alert span12">
-	<span>No companies have been registered yet.</span>
-</div>
+	<div class="alert col-md-12">
+		<span>No companies have been registered yet.</span>
+	</div>
 
-<% end %>
-
-<% if session[:user_access] == 4 %>
-<div class="top-buttons span12">
-	<%= link_to "New Company", new_company_path(), html_options = { class: "btn" } %>
-</div>
-<% end %>
-
-<% if @companies.count != 0 %>
-
-<div class="span12">
-
-<table class="table table-responsive table-striped table-hover table-bordered" id="table-companies">
-	
-	<thead>
-		<tr>
-			<th span="col" class="company-name">Company name</th>
-			<th span="col" class="email">Email</th>
-			<th span="col" class="telephone">Telephone</th>
-			<th span="col" class="contact-name">Contact Name</th>
-			<th span="col" class="billing-address span2">Billing Address</th>
-		</tr>
-	</thead>
-	
-	<tbody>
-
-	<% @companies.each do |company| %>
-	<tr>
-		<th span="row" class="company-name">
-			<%= link_to company.name, company %>
-		</th>
-		<td class="email">
-			<%= mail_to company.email %>
-		</td>
-		<td class="telephone">
-			<a href="tel:<%= company.tel %>"><%= company.tel %></a>
-		</td>
-		<td class="contact-name">
-			<%= company.contact_name %>
-		</td>
-		<td class="billing-address">
-			<address>
-				<% if company.address1.present? %><span><%= company.address1 %></span><br /><% end %>
-				<% if company.address2.present? %><span><%= company.address2 %></span><br /><% end %>
-				<% if company.postcode.present? %><span><%= company.postcode %></span><% end %>
-				<% if company.city.present? %><span><%= company.city %></span><% end %>
-			</address>
-		</td>
-	</tr>
 	<% end %>
+
+	<% if session[:user_access] == 4 %>
+	<div class="top-buttons col-md-12">
+		<%= link_to "New Company", new_company_path(), html_options = { class: "btn btn-default" } %>
+	</div>
+	<% end %>
+
+	<% if @companies.count != 0 %>
+
+	<div class="col-md-12">
+
+		<table class="table table-responsive table-striped table-hover table-bordered" id="table-companies">
 	
-	</tbody>
+			<thead>
+				<tr>
+					<th span="col" class="company-name">Company name</th>
+					<th span="col" class="email">Email</th>
+					<th span="col" class="telephone">Telephone</th>
+					<th span="col" class="contact-name">Contact Name</th>
+					<th span="col" class="billing-address span2">Billing Address</th>
+				</tr>
+			</thead>
+	
+			<tbody>
 
-</table>
+				<% @companies.each do |company| %>
+				<tr>
+					<th span="row" class="company-name">
+						<%= link_to company.name, company %>
+					</th>
+					<td class="email">
+						<%= mail_to company.email %>
+					</td>
+					<td class="telephone">
+						<a href="tel:<%= company.tel %>"><%= company.tel %></a>
+					</td>
+					<td class="contact-name">
+						<%= company.contact_name %>
+					</td>
+					<td class="billing-address">
+						<address>
+							<% if company.address1.present? %><span><%= company.address1 %></span><br /><% end %>
+							<% if company.address2.present? %><span><%= company.address2 %></span><br /><% end %>
+							<% if company.postcode.present? %><span><%= company.postcode %></span><% end %>
+							<% if company.city.present? %><span><%= company.city %></span><% end %>
+						</address>
+					</td>
+				</tr>
+				<% end %>
+	
+			</tbody>
 
-</div>
+		</table>
+		
+		<div class="pagination-container">
+		<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+		</div>
+		
+	</div>
 
 <% end %>
 

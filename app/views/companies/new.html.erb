@@ -1,31 +1,33 @@
-<div class="row content-header">
+<header>
 	
-	<nav class="span6 pull-right">
+	<nav class="">
 		<ul class="breadcrumb">
-			<li><%= link_to "Home", "/" %> <span class="divider">/</span></li>
-			<li><%= link_to "Companies", :action => "index" %> <span class="divider">/</span></li>
+			<li><%= link_to "Home", "/" %></li>
+			<li><%= link_to "Companies", :action => "index" %></li>
 			<li><%= link_to "New Company", :action => "new" %></li>
 		</ul>
 	</nav>
-
-	<h1 class="span9">New company</h1>
-
-</div>
+	
+	<div class="">
+	
+		<h1 class="">New company</h1>
+		
+	</div>
+	
+</header>
 
 <div class="row">
 	
-	<div class="span8">
-		<%= render "form" %>
-	</div>
+	<%= render "form" %>
 	
-	<div class="span4 pull-right">
-		<nav class="" id="company-show-sidebar">
-			<ul class="nav nav-tabs nav-stacked">
-				<li>
-					<%= link_to "Back to companies", companies_path%>
-				</li>
-			</ul>
-		</nav>
+		<div class="col-md-4 pull-right">
+			<nav class="" id="company-show-sidebar">
+				<ul class="nav nav-tabs nav-stacked">
+					<li>
+						<%= link_to "Back to companies", companies_path%>
+					</li>
+				</ul>
+			</nav>
+		</div>
 	</div>
-	
 </div>

@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#main-header { margin-top: 2em; }
+#main-heading a { display: block; width: 300px; height: 60px; margin-bottom: 1em; outline: 1px solid red; }
+
+.top-buttons { margin-bottom: 1em; }
+
 // Forms
 .new_company .buttons, .edit_company .buttons { text-align: right; }
 
@@ -15,6 +20,10 @@ table .email { width: 6em; }
 table .billing-address { width: 15em; }
 table .buttons { width: 115px; }
 
+.breadcrumb { text-align: right; background-color: transparent; margin-top: 1em; }
+
+.pagination-container { text-align: center; }
+
 // Sidebar
 // #company-show-sidebar { margin-top: 60px; }
 
@@ -23,7 +32,6 @@ table .buttons { width: 115px; }
 }
 
 @media (min-width: 768px) {
-	.breadcrumb { text-align: right; background-color: transparent; }
 	table td, table th { width: auto !important; }
 }
 
