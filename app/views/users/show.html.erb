@@ -21,7 +21,7 @@
 		<div class="col-md-8 top-buttons">
 			<%= link_to "Edit User", edit_company_user_path(@company, @user), class: "btn btn-default edit pull-left" %>
 			<% if @user.id != session[:user_id] %>
-			<%= link_to "Delete User", company_user_path(@company, @user), method: :delete, data: { confirm: "Are you sure you want to delete this user?" }, class: "btn btn-mini btn-danger delete pull-right" %>
+			<%= link_to "Delete User", company_user_path(@company, @user), method: :delete, data: { confirm: "Are you sure you want to delete this user?" }, class: "btn btn-xs btn-danger delete pull-right" %>
 			<% end %>
 		</div>
 		<% end %>
@@ -51,7 +51,7 @@
 						<% if @user.enabled %>
 						<span class="label label-success">Enabled</span>
 						<% else %>
-						<span class="label label-important">Disabled</span>
+						<span class="label label-warning">Disabled</span>
 						<% end %>
 					</td>
 				</tr>
