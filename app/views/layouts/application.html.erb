@@ -20,15 +20,13 @@
 			<nav class="">
 				<ul class="nav nav-tabs">
 					<% if session[:user_access] == 0 || session[:user_access] == 2 %>
-					<li><a href="<%= company_path(session[:company_id]) %>">My Company</a></li>
+					<%= nav_item('My Company', company_path(session[:company_id]), 'companies').html_safe %>
+					<%= nav_item('My Users', company_users_path(session[:company_id]), 'users').html_safe %>
 					<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
-					<li class="active"><a href="<%= companies_path %>">Companies</a></li>
+					<%= nav_item('Companies', companies_path, 'companies').html_safe %>
 					<% end %>
 					<li class="dropdown pull-right">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<%= session[:user_fullname] %>
-							<i class="caret"></i>
-						</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= session[:user_fullname] %></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%= logout_path %>">Log out</a></li>
 						</ul>

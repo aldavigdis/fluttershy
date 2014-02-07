@@ -18,18 +18,18 @@
 <div class="row">
 
 	<% if session[:user_access] == 4 && !params[:search] %>
-	<div class="top-buttons col-md-8">
+	<div class="top-buttons col-sm-3">
 		<%= link_to "New Company", new_company_path(), html_options = { class: "btn btn-default" } %>
 	</div>
 	<% end %>
 	
 	<% if params[:search] %>
-	<div class="top-buttons col-md-8">
+	<div class="top-buttons col-sm-3">
 		<%= link_to "Back to company list", companies_path(), html_options = { class: "btn btn-default" } %>
 	</div>
 	<% end %>
 	
-	<%= form_tag( nil, { :class => "col-sm-4 form-inline pull-right", :id => "companies-search-form", :method => "get" }) do %>
+	<%= form_tag( nil, { :class => "col-sm-9 form-inline", :id => "companies-search-form", :method => "get" }) do %>
 		<%= search_field_tag "search", params[:search], class: "form-control" %>
 		<%= submit_tag "Search", class: "btn btn-primary" %>
 	<% end %>

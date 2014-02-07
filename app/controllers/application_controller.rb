@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
+  helper_method :nav_item
+  
+  def nav_item(text, url, controller=nil)
+    if params[:controller] == controller
+      css_class = 'active'
+    end
+    return '<li class="'+css_class.to_s+'"><a href="'+url.to_s+'">'+text.to_s+'</a></li>'
+  end
+  
   def user_access_levels
     return { User: 0, Kiosk: 1, Admin: 2, Superuser: 3, Superadmin: 4 }
   end
