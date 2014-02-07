@@ -34,9 +34,9 @@ class UsersController < ApplicationController
   
   def update
     @company = Company.find(params[:company_id])
-    if ((session[:user_access] == 2) && (@company.id == session[:company_id]) && session[:user_access] >= @user.access) || session[:user_access] == 4
+    @user = User.find(params[:id])
+    if (session[:user_access] == 2 && @company.id == session[:company_id] && session[:user_access] >= @user.access) || session[:user_access] == 4
       
-      @user = User.find(params[:id])
       user_seed = password_seed
       user_hash = password_hash(params[:user]["password"], user_seed)
       

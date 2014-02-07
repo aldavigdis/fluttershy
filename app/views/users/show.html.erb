@@ -15,7 +15,7 @@
 	
 	</div>
 	
-	<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) && session[:user_access] >= @user.access) || session[:user_access] == 4 %>
+	<% if (session[:user_access] == 2 && @company.id == session[:company_id] && session[:user_access] >= @user.access) || session[:user_access] == 4 %>
 	<div class="col-md-8 top-buttons">
 		<%= link_to "Edit User", edit_company_user_path(@company, @user), class: "btn btn-default edit pull-left" %>
 		<% if @user.id != session[:user_id] %>
@@ -65,7 +65,7 @@
 		
 		<div class="row">
 			<div class="col-md-12">
-				<% if (((session[:user_access] == 2) && (@company.id == session[:company_id])) || session[:user_access] == 4) && @user.logins.size != 0 %>
+				<% if session[:user_access] == 4 %>
 				<h2>Recent Login Attempts</h2>
 				<table class="table table-bordered">
 					<thead>
