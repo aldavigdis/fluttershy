@@ -19,8 +19,8 @@
 			
 			<nav class="">
 				<ul class="nav nav-tabs">
-					<% if session[:user_access] == 0..2 %>
-					<li class="active"><a href="<%= company_path(session[:company_id]) %>">My Company</a></li>
+					<% if session[:user_access] == 0 || session[:user_access] == 2 %>
+					<li><a href="<%= company_path(session[:company_id]) %>">My Company</a></li>
 					<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
 					<li><a href="<%= companies_path %>">Companies</a></li>
 					<% end %>
