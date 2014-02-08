@@ -1,5 +1,6 @@
 Fluttershy::Application.routes.draw do
   
+  get 'internet_usage/', to: 'internet_usage#index'
   # Set the root to deliveries
   # Todo: Change this to the login 
   
@@ -12,7 +13,8 @@ Fluttershy::Application.routes.draw do
   get '/', to: 'login#index'
   post '/', to: 'login#index'
   get '/logout', to: 'login#logout'
-    
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
