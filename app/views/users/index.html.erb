@@ -1,25 +1,28 @@
-<header class="row">
-
-	<nav>
-		<ul class="breadcrumb pull-right">
-			<li><%= link_to "Home", "/" %></li>
-			<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
-			<li><%= link_to @company.name, @company %></li>
-			<li><%= link_to "Users", :action => "index" %></li>
-		</ul>
-	</nav>
-
-	<div class="col-md-8 current-heading">
+<header class="row" id="content-header">
+			
+		<nav class="col-md-5 pull-right">
+			<ul class="breadcrumb">
+				<li><%= link_to "Home", "/" %></li>
+				<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
+				<li><%= link_to @company.name, @company %></li>
+				<li><%= link_to "Users", :action => "index" %></li>
+			</ul>
+		</nav>
 	
-		<h1>Users assigned to <%= @company.name %></h1>
+		<div class="col-md-7 current-heading">
 	
-	</div>
-	
-	<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
-	<div class="top-buttons col-md-8">
-		<%= link_to "New User", new_company_user_path(), html_options = { class: "btn btn-default" } %>
-	</div>
-	<% end %>
+			<h1>
+				Users assigned
+				<small><%= @company.name %></small>
+			</h1>
+		
+		</div>
+		
+		<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
+		<div class="top-buttons col-md-8">
+			<%= link_to "New User", new_company_user_path(), html_options = { class: "btn btn-default" } %>
+		</div>
+		<% end %>
 	
 </header>
 

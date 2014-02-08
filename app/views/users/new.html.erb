@@ -1,20 +1,23 @@
-<header class="row">
+<header class="row" id="content-header">
+			
+		<nav class="col-md-6 pull-right">
+			<ul class="breadcrumb">
+				<li><%= link_to "Home", "/" %></li>
+				<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
+				<li><%= link_to @company.name, @company %> </li>
+				<li><%= link_to "Users", :action => "index" %></li>
+				<li><%= link_to "New User", :action => "index" %></li>
+			</ul>
+		</nav>
 	
-	<nav>
-		<ul class="breadcrumb pull-right">
-			<li><%= link_to "Home", "/" %></li>
-			<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
-			<li><%= link_to @company.name, @company %> </li>
-			<li><%= link_to "Users", :action => "index" %></li>
-			<li><%= link_to "New User", :action => "index" %></li>
-		</ul>
-	</nav>
+		<div class="col-md-6 current-heading">
 	
-	<div class="col-md-8 current-heading">
-	
-		<h1>New user for <%= @company.name %></h1>
-	
-	</div>
+			<h1>
+				New user
+				<small><%= @company.name %></small>
+			</h1>
+		
+		</div>
 	
 </header>
 

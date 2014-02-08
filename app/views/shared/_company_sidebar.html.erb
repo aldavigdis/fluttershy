@@ -1,6 +1,6 @@
 <nav class="" id="company-show-sidebar">
 	
-	<ul class="nav nav-tabs nav-stacked">
+	<ul class="nav nav-pills nav-stacked">
 		<li>
 			<%= link_to "Company info", @company%>
 		</li>
@@ -12,7 +12,7 @@
 	</ul>
 	
 	<% if session[:user_access] == 4 %>
-	<ul class="nav nav-tabs nav-stacked">
+	<ul class="nav nav-pills nav-stacked">
 		<li>
 			<%= link_to "Back to companies", companies_path%>
 		</li>
