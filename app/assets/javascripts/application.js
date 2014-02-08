@@ -17,3 +17,9 @@
 
 // Loads all Bootstrap javascripts
 //= require bootstrap
+
+//= require d3.v3
+//= require nv.d3
+//= require utils
+//= require tooltip
+//= require stackedArea
