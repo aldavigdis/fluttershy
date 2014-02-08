@@ -16,31 +16,13 @@
 	
 </header>
 
-<header class="row">
-	
-	<nav>
-		<ul class="breadcrumb">
-			<li><%= link_to "Home", "/" %></li>
-			<li><%= link_to "Companies", :action => "index" %></li>
-			<li><%= link_to "New Company", :action => "new" %></li>
-		</ul>
-	</nav>
-	
-	<div class="col-md-8 current-heading">
-	
-		<h1>New company</h1>
-		
-	</div>
-	
-</header>
-
 <div class="row">
 	
 	<%= render "form" %>
 	
 	<div class="col-md-4 pull-right">
 		<nav class="" id="company-show-sidebar">
-			<ul class="nav nav-tabs nav-stacked">
+			<ul class="nav nav-pills nav-stacked">
 				<li>
 					<%= link_to "Back to companies", companies_path%>
 				</li>
