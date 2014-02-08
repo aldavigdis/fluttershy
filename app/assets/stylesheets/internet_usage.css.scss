@@ -7,8 +7,9 @@
 .usage-totals th { text-align: right; }
 .usage-totals td { padding-left: 0.5em; text-align: right; }
 
-.chart h2 { font-size: 18px; }
+.chart h2 { font-size: 24px; }
 
+// Chart tooltips
 .nvtooltip h3 { text-align: right; font-weight: bold; background-color: transparent; padding-right: 0.5em; }
 .nvtooltip tfoot { border-top: 1px solid #ebebeb; }
 .nvtooltip th { text-align: right; padding-right: 0.5em; }
@@ -16,9 +17,9 @@
 .nvtooltip thead { border-bottom: 1px solid #ebebeb; }
 .nvtooltip thead th { text-align: right; padding-bottom: 0.5em; padding-right: 0.5em; }
 
-.nv-x.nv-axis { display: none; }
-
+// Chart SVG styles
+.nvd3 .nv-x.nv-axis { display: none; }
 .nvd3 .nv-axis .nv-axisMaxMin text { font-weight: normal; }
 .nvd3 .nv-axis path.domain { display: none; }
-
-.tick line { display: none; }
+.nvd3 .tick line { display: none; }
+.nvd3 .nv-controlsWrap { display: none; }
