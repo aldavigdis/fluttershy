@@ -1,18 +1,21 @@
-<header>
-
-	<nav class="">
-		<ul class="breadcrumb">
-			<li><%= link_to "Companies", :action => "index" %></li>
-			<li><%= link_to @company.name, @company %></li>
-			<li><%= link_to "Edit", edit_company_path(@company) %></li>
-		</ul>
-	</nav>
-
-	<div class="col-md-8 current-heading">
+<header class="row" id="content-header">
+			
+		<nav class="col-md-6 pull-right">
+			<ul class="breadcrumb">
+				<li><%= link_to "Companies", :action => "index" %></li>
+				<li><%= link_to @company.name, @company %></li>
+				<li><%= link_to "Edit", edit_company_path(@company) %></li>
+			</ul>
+		</nav>
 	
-		<h1><%= @company.name %></h1>
+		<div class="col-md-6 current-heading">
 	
-	</div>
+			<h1>
+				Edit Account
+				<small><%= @company.name %></small>
+			</h1>
+		
+		</div>
 	
 </header>
 
