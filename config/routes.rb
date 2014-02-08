@@ -1,5 +1,6 @@
 Fluttershy::Application.routes.draw do
   
+  get "mobile_usage/", to: "mobile_usage#index"
   get 'internet_usage/', to: 'internet_usage#index'
   # Set the root to deliveries
   # Todo: Change this to the login 
