@@ -1,5 +1,6 @@
-<header class="row">
+<header class="row" id="content-header">
 			
+		<nav class="col-md-6 pull-right">
 			<ul class="breadcrumb">
 				<li><%= link_to "Home", "/" %></li>
 				<li><%= link_to "Companies", :action => "index" %></li>
@@ -28,8 +29,8 @@
 	</div>
 	<% end %>
 	
-	<%= form_tag( nil, { :class => "col-sm-9 form-inline", :id => "companies-search-form", :method => "get" }) do %>
-		<%= search_field_tag "search", params[:search], class: "form-control" %>
+	<%= form_tag( nil, { :class => "col-sm-9 form-inline company-search-form-top", :id => "companies-search-form", :method => "get" }) do %>
+		<%= search_field_tag "search", params[:search], class: "form-control", placeholder: "Search Term" %>
 		<%= submit_tag "Search", class: "btn btn-primary" %>
 	<% end %>
 
