@@ -23,11 +23,15 @@
 					<%= nav_item('My Company', company_path(session[:company_id]), 'companies').html_safe %>
 					<%= nav_item('My Users', company_users_path(session[:company_id]), 'users').html_safe %>
 					<%= nav_item('Internet Usage', internet_usage_path, 'internet_usage').html_safe %>
+					<%= nav_item('Mobile Usage', mobile_usage_path, 'mobile_usage').html_safe %>
 					<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
 					<%= nav_item('Companies', companies_path, 'companies').html_safe %>
 					<% end %>
 					<li class="dropdown pull-right">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= session[:user_fullname] %></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-user"></span>
+							<%= session[:user_fullname] %>
+						</a>
 						<ul class="dropdown-menu">
 							<li><a href="<%= logout_path %>">Log out</a></li>
 						</ul>

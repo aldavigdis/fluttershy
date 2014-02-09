@@ -24,3 +24,5 @@
 
 #footer { margin: 2em 0; }
 #footer p { font-size: 0.8em; color: #aaa; }
+
+.chart { position: static !important; margin: 2em 0; }

@@ -1,2 +1,348 @@
-<h1>MobileUsage#index</h1>
-<p>Find me in app/views/mobile_usage/index.html.erb</p>
+<script>
+//chartMinutes('.mobile-calls-chart svg', window.mobileMinutes);
+//chartData('.mobile-data-chart svg', window.dataUsage);
+//chartInterger('.mobile-messages-chart svg', window.mobileMessages);
+</script>
+
+<header class="row" id="content-header">
+			
+		<nav class="col-md-8 pull-right">
+			<ul class="breadcrumb">
+				<li><%= link_to "Home", "/" %></li>
+				<li><%= link_to "Mobile Usage", :action => "index" %></li>
+				<li><%= link_to "8496891", :action => "index" %></li>
+			</ul>
+		</nav>
+	
+		<div class="col-md-4 current-heading">
+	
+			<h1>
+				849 6891
+				<small>Farsími 100</small>
+			</h1>
+		
+		</div>
+	
+</header>
+
+<div class="row">
+	
+	<nav class="col-md-8">
+		<ul class="nav nav-pills chart-select">
+			<li class="active">
+				<a href="#mobile-calls" class="get-phone-calls">
+					<span class="glyphicon glyphicon-phone"></span>
+					Calls
+				</a>
+			</li>
+			<li>
+				<a href="#mobile-data" clann="get-data-usage">
+					<span class="glyphicon glyphicon-transfer"></span>
+					Data Usage
+				</a>
+			</li>
+			<li>
+				<a href="#mobile-messages" class="get-messages">
+					<span class="glyphicon glyphicon-th"></span>
+					Messages
+				</a>
+			</li>
+			<li class="pull-right">
+				<a href="#mobile-settings" class="get-messages">
+					<span class="glyphicon glyphicon-th"></span>
+					Subscription Settings
+				</a>
+			</li>
+		</ul>
+	</nav>
+	
+	<div class="col-sm-8">
+		
+		<div class="row usage-data-container mobile-calls" id="mobile-calls">
+			
+			<div class="col-sm-12 mobile-calls-chart chart chart1">
+				<svg></svg>
+			</div>
+			
+		</div>
+		
+		<div class="row usage-data-container mobile-data" id="mobile-data">
+			
+			<div class="col-sm-12 mobile-data-chart chart chart2">
+				<svg></svg>
+			</div>
+			
+			<div class="col-sm-4">
+				<table class="table table-bordered">
+					<tr>
+						<th>Usage This Month</th>
+						<td>1 GB</td>
+					</tr>
+					<tr>
+						<th>Usage Included</th>
+						<td>2,50 GB</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div class="col-sm-8">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Day</th>
+							<th>Domestic Use</th>
+							<th>International Roaming</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Jan. 1</th>
+							<td>98 MB</td>
+							<td>0 MB</td>
+							<td>98 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 2</th>
+							<td>142 MB</td>
+							<td>0 MB</td>
+							<td>142 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 3</th>
+							<td>21 MB</td>
+							<td>0 MB</td>
+							<td>21 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 4</th>
+							<td>58 MB</td>
+							<td>0 MB</td>
+							<td>58 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 5</th>
+							<td>130 MB</td>
+							<td>0 MB</td>
+							<td>130 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 6</th>
+							<td>13 MB</td>
+							<td>0 MB</td>
+							<td>13 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 7</th>
+							<td>52 MB</td>
+							<td>0 MB</td>
+							<td>52 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 8</th>
+							<td>98 MB</td>
+							<td>0 MB</td>
+							<td>98 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 9</th>
+							<td>55 MB</td>
+							<td>0 MB</td>
+							<td>55 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 10</th>
+							<td>101 MB</td>
+							<td>0 MB</td>
+							<td>101 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 11</th>
+							<td>93 MB</td>
+							<td>0 MB</td>
+							<td>93 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 12</th>
+							<td>132 MB</td>
+							<td>0 MB</td>
+							<td>132 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 13</th>
+							<td>108 MB</td>
+							<td>0 MB</td>
+							<td>108 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 14</th>
+							<td>45 MB</td>
+							<td>0 MB</td>
+							<td>45 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 15</th>
+							<td>92 MB</td>
+							<td>0 MB</td>
+							<td>92 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 16</th>
+							<td>144 MB</td>
+							<td>0 MB</td>
+							<td>144 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 17</th>
+							<td>62 MB</td>
+							<td>0 MB</td>
+							<td>62 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 18</th>
+							<td>66 MB</td>
+							<td>0 MB</td>
+							<td>66 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 19</th>
+							<td>137 MB</td>
+							<td>0 MB</td>
+							<td>137 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 20</th>
+							<td>25 MB</td>
+							<td>0 MB</td>
+							<td>25 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 21</th>
+							<td>121 MB</td>
+							<td>0 MB</td>
+							<td>121 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 22</th>
+							<td>94 MB</td>
+							<td>0 MB</td>
+							<td>94 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 23</th>
+							<td>98 MB</td>
+							<td>15 MB</td>
+							<td>113 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 24</th>
+							<td>0 MB</td>
+							<td>94 MB</td>
+							<td>94 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 25</th>
+							<td>0 MB</td>
+							<td>65 MB</td>
+							<td>65 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 26</th>
+							<td>104 MB</td>
+							<td>25 MB</td>
+							<td>129 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 27</th>
+							<td>140 MB</td>
+							<td>0 MB</td>
+							<td>140 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 28</th>
+							<td>100 MB</td>
+							<td>0 MB</td>
+							<td>100 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 29</th>
+							<td>68 MB</td>
+							<td>0 MB</td>
+							<td>68 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 30</th>
+							<td>73 MB</td>
+							<td>0 MB</td>
+							<td>73 MB</td>
+						</tr>
+						<tr>
+							<th>Jan. 31</th>
+							<td>66 MB</td>
+							<td>0 MB</td>
+							<td>66 MB</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>Total</th>
+							<td>2.311 MB</td>
+							<td>199 MB</td>
+							<td>98 MB</td>
+						</tr>
+					</tfoot>
+				</table>
+				<a href="#" class="btn btn-default">
+					<span class="glyphicon glyphicon-arrow-down"></span>
+					Download CSV
+				</a>
+			</div>
+			
+		</div>
+		
+		<div class="row usage-data-container mobile-messages" id="mobile-messages">
+		
+			<div class="col-sm-12 mobile-messages-chart chart chart1">
+				<svg></svg>
+			</div>
+		
+		</div>
+		
+		<div class="row settings-container mobile-settings" id="mobile-settings">
+			<%= form_tag( nil, { :class => "col-sm-6", :id => "mobile-settings-form" }) do %>
+			<div class="form-group">
+				<%= label_tag "name" %>
+				<%= email_field_tag "name", nil, class: "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= label_tag "subscription_plan" %>
+				<%= email_field_tag "subscription_plan", nil, class: "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= label_tag "user" %>
+				<%= email_field_tag "user", nil, class: "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= submit_tag "Save", class: "btn btn-primary" %>
+			</div>
+			<% end %>
+		</div>
+		
+	</div>
+	
+	<div class="col-md-4 pull-right">
+		<nav class="" id="company-show-sidebar">
+
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="#">January 2014</a></li>
+				<li><a href="#">February 2014</a></li>
+				<li><a href="#">December 2013</a></li>
+				<li><a href="#">November 2013</a></li>
+				<li><a href="#">October 2013</a></li>
+				<li><a href="#">September 2013</a></li>
+			</ul>
+
+		</nav>
+	</div>
+
+</div>

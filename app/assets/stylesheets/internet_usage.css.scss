@@ -2,12 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.chart { }
 .usage-totals { float: right; }
 .usage-totals th { text-align: right; }
 .usage-totals td { padding-left: 0.5em; text-align: right; }
 
-.chart h2 { font-size: 24px; }
+.controller-internet_usage .chart h2 { font-size: 24px; }
 
 // Chart tooltips
 .nvtooltip h3 { text-align: right; font-weight: bold; background-color: transparent; padding-right: 0.5em; }
