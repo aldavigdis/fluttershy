@@ -2,11 +2,11 @@
 	
 	<ul class="nav nav-pills nav-stacked">
 		<li>
-			<%= link_to "Company info", @company%>
+			<%= nav_item('Company info', '/companies/1', 'companies').html_safe %>
 		</li>
 		<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
 		<li>
-			<%= link_to "Users", company_users_path(@company) %>
+			<%= nav_item('Users', company_users_path(@company), 'users').html_safe %>
 		</li>
 		<% end %>
 	</ul>
