@@ -221,7 +221,6 @@ window.mobileMessages = [
 ]
 
 $(document).on('ready page:load', function () {
-	console.log(window.location.pathname)
 	if (window.location.pathname == '/mobile_usage') {
 		chartMinutes('.mobile-calls-chart svg', window.mobileMinutes)
 		$('.usage-data-container:not(.mobile-calls)').hide()
