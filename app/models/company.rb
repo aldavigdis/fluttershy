@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
   def self.search(search)
     if search and search[:name].present?
       bind = '%' + search[:name] + '%'
-      find(:all, :conditions => ["name LIKE ? OR kt LIKE ? OR email LIKE ? OR tel LIKE ? OR mobile LIKE ? OR fax LIKE ? OR contact_name LIKE ? OR address1 LIKE ? OR address2 LIKE ? OR postcode LIKE ? OR city LIKE ? OR shipping_address1 LIKE ? OR shipping_address2 LIKE ? OR shipping_postcode LIKE ? OR shipping_city LIKE ?", bind, bind, bind, bind, bind, bind, bind, bind, bind, bind, bind, bind, bind, bind, bind])
+      find(:all, :conditions => ["name LIKE :term OR kt LIKE :term OR email LIKE :term OR tel LIKE :term OR mobile LIKE :term OR fax LIKE :term OR contact_name LIKE :term OR address1 LIKE :term OR address2 LIKE :term OR postcode LIKE :term OR city LIKE :term OR shipping_address1 LIKE :term OR shipping_address2 LIKE :term OR shipping_postcode LIKE :term OR shipping_city LIKE :term", {term: bind}])
     else
       find(:all)
     end
