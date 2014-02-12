@@ -25,8 +25,11 @@
 					<% elsif session[:user_access] == 3 || session[:user_access] == 4 %>
 					<%= nav_item('Companies', companies_path, 'companies').html_safe %>
 					<% end %>
-					<li class="dropdown pull-right">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= session[:user_fullname] %></a>
+					<li class="dropdown navbar-right">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-user"></span>
+							<%= session[:user_fullname] %>
+						</a>
 						<ul class="dropdown-menu">
 							<li><a href="<%= logout_path %>">Log out</a></li>
 						</ul>
