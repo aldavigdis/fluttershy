@@ -14,9 +14,9 @@
 
 @import 'nv.d3.css';
 
-#main-header { margin-top: 2em; }
-#main-heading { margin-bottom: 2em; }
-#main-heading a { display: block; width: 300px; height: 60px; margin-bottom: 1em; background-color: #428bca; }
+#main-header { margin-top: 3em; }
+#main-heading { margin-bottom: 1em; }
+#main-heading a { display: block; width: 300px; height: 60px; }
 
 #content-header { margin-bottom: 2em; margin-top: 2em; }
 
