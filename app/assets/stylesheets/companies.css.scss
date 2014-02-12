@@ -17,11 +17,15 @@ table .email { width: 6em; }
 table .billing-address { width: 15em; }
 table .buttons { width: 115px; }
 
-.breadcrumb { text-align: right; background-color: transparent; margin-top: 1em; }
-
 .pagination-container { text-align: center; }
 
-.company-search-form-top { text-align: right; }
+.breadcrumb { background-color: transparent; padding: 8px 0; }
+
+$screen-md-min: 992px;
+
+@media (min-width: $screen-md-min) {
+	.breadcrumb { text-align: right; margin-top: 1em; }
+}
 
 // Sidebar
 // #company-show-sidebar { margin-top: 60px; }
@@ -47,3 +51,4 @@ table .buttons { width: 115px; }
 	#table-companies a { display: block; }
 	#table-company-users .email, #table-company-users .access { display: none; }
 }
+

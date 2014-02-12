@@ -1,15 +1,12 @@
 <header class="row" id="content-header">
 			
-		<nav class="col-md-5 pull-right">
+		<nav class="col-md-4 col-md-push-8">
 			<ul class="breadcrumb">
-				<li><%= link_to "Home", "/" %></li>
-				<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
-				<li><%= link_to @company.name, @company %></li>
 				<li><%= link_to "Users", :action => "index" %></li>
 			</ul>
 		</nav>
 	
-		<div class="col-md-7 current-heading">
+		<div class="col-md-8 col-md-pull-4 current-heading">
 	
 			<h1>
 				Users assigned
@@ -17,16 +14,16 @@
 			</h1>
 		
 		</div>
-		
-		<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
-		<div class="top-buttons col-md-8">
-			<%= link_to "New User", new_company_user_path(), html_options = { class: "btn btn-default" } %>
-		</div>
-		<% end %>
 	
 </header>
 
 <div class="row">
+	
+	<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 4 %>
+	<div class="top-buttons col-md-8">
+		<%= link_to "New User", new_company_user_path(), html_options = { class: "btn btn-default" } %>
+	</div>
+	<% end %>
 	
 	<div class="col-md-8">
 		
@@ -79,7 +76,7 @@
 		
 	</div>
 	
-	<div class="col-md-4 pull-right">
+	<div class="col-md-4">
 		<%= render "shared/company_sidebar" %>
 	</div>
 	

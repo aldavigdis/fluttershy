@@ -1,14 +1,18 @@
 <header class="row" id="content-header">
 			
-		<nav class="col-md-6 pull-right">
+		<nav class="col-md-6 col-md-push-6">
 			<ul class="breadcrumb">
-				<li><%= link_to "Companies", :action => "index" %></li>
+				<% if session[:user_access] == 3 || session[:user_access] == 4 %>
+				<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
 				<li><%= link_to @company.name, @company %></li>
+				<% else %>
+				<li><%= link_to "My Company", @company %></li>
+				<% end %>
 				<li><%= link_to "Edit", edit_company_path(@company) %></li>
 			</ul>
 		</nav>
 	
-		<div class="col-md-6 current-heading">
+		<div class="col-md-6 col-md-pull-6 current-heading">
 	
 			<h1>
 				Edit Account
@@ -23,7 +27,7 @@
 	
 	<%= render "form" %>
 	
-	<div class="col-md-4 pull-right">
+	<div class="col-md-4">
 		<%= render "shared/company_sidebar" %>
 	</div>
 	

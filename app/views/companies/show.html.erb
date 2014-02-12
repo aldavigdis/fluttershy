@@ -1,8 +1,7 @@
 <header class="row" id="content-header">
 			
-		<nav class="col-md-6 pull-right">
+		<nav class="col-md-6 col-md-push-6">
 			<ul class="breadcrumb">
-				<li><%= link_to "Home", "/" %></li>
 				<% if session[:user_access] == 3 || session[:user_access] == 4 %>
 				<li><%= link_to "Companies", :controller => "companies", :action => "index" %></li>
 				<li><%= link_to @company.name, @company %></li>
@@ -12,26 +11,26 @@
 			</ul>
 		</nav>
 	
-		<div class="col-md-6 current-heading">
+		<div class="col-md-6 col-md-pull-6 current-heading">
 	
 			<h1><%= @company.name %></h1>
 		
 		</div>
-		
-		<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) || session[:user_access] == 4) %>
-		<div class="col-md-6 top-buttons">
-			<%= link_to "Edit Account", edit_company_path(@company), class: "btn btn-default edit" %>
-			<% if session[:user_access] == 4 %>
-			<% if @company.id != session[:company_id] %>
-			<%= link_to "Delete Account", company_path(@company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-xs btn-danger delete pull-right" %>
-			<% end %>
-			<% end %>
-		</div>
-		<% end %>
 	
 </header>
 
 <div class="row">
+	
+	<% if ((session[:user_access] == 2) && (@company.id == session[:company_id]) || session[:user_access] == 4) %>
+	<div class="col-md-6 top-buttons">
+		<%= link_to "Edit Account", edit_company_path(@company), class: "btn btn-default edit" %>
+		<% if session[:user_access] == 4 %>
+		<% if @company.id != session[:company_id] %>
+		<%= link_to "Delete Account", company_path(@company), method: :delete, data: { confirm: "Are you sure you want to delete this account and all data accociated with it?" }, class: "btn btn-xs btn-danger delete pull-right" %>
+		<% end %>
+		<% end %>
+	</div>
+	<% end %>
 	
 	<div class="col-md-8">
 		<% if @company.enabled == false %>
@@ -132,7 +131,7 @@
 		</div>
 	</div>
 	
-	<div class="col-md-4 pull-right">
+	<div class="col-md-4">
 		<%= render "shared/company_sidebar" %>
 	</div>
 	

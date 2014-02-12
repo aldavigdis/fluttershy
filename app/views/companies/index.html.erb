@@ -1,13 +1,12 @@
 <header class="row" id="content-header">
 			
-		<nav class="col-md-6 pull-right">
+		<nav class="col-md-6 col-md-push-6">
 			<ul class="breadcrumb">
-				<li><%= link_to "Home", "/" %></li>
 				<li><%= link_to "Companies", :action => "index" %></li>
 			</ul>
 		</nav>
 	
-		<div class="col-md-6 current-heading">
+		<div class="col-md-6 col-md-pull-6 current-heading">
 	
 			<h1>Companies</h1>
 		
@@ -18,20 +17,28 @@
 <div class="row">
 
 	<% if session[:user_access] == 4 && !params[:search] %>
-	<div class="top-buttons col-md-3">
+	<div class="top-buttons col-md-8 col-sm-6">
 		<%= link_to "New Company", new_company_path(), html_options = { class: "btn btn-default" } %>
 	</div>
 	<% end %>
 	
 	<% if params[:search] %>
-	<div class="top-buttons col-md-3">
+	<div class="top-buttons col-md-3 col-sm-1">
 		<%= link_to "Back to company list", companies_path(), html_options = { class: "btn btn-default" } %>
 	</div>
 	<% end %>
 	
-	<%= form_tag( nil, { :class => "col-md-9 form-inline company-search-form-top", :id => "companies-search-form", :method => "get" }) do %>
+	<%= form_tag( nil, { :class => "col-md-4 col-sm-6 col-xs-12 form-inline company-search-form-top", :id => "companies-search-form", :method => "get" }) do %>
+	<%= label_tag "Search", "Quick Search", class: "sr-only" %>
+	<div class="input-group">
 		<%= search_field_tag "search", params[:search], class: "form-control", placeholder: "Search Term" %>
-		<%= submit_tag "Search", class: "btn btn-primary" %>
+		<span class="input-group-btn">
+			<%= submit_tag "Search", class: "btn btn-primary" %>
+		</span>
+	</div>
+	<div class="form-group">
+		
+	</div>
 	<% end %>
 
 	<div class="col-md-12">
