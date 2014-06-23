@@ -61,21 +61,18 @@ class ApplicationController < ActionController::Base
   
   def login_startpath(access)
     case session[:user_access]
-    when 0
-      company_path(session[:company_id])
-    when 1
-      company_path(session[:company_id])
-    when 2
-      company_path(session[:company_id])
+    when 0..2
+      return company_path(session[:company_id])
     when 3..4
       return companies_path      
     end
   end
   
   def access_denied
-    render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
-  end
-  
+    render(
+      :file => File.join(Rails.root, 'public/403.html'), :status => 403,
+      :layout => false
+    )
   end
     
 end
