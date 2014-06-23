@@ -12,6 +12,8 @@ Fluttershy::Application.routes.draw do
   get '/', to: 'login#index'
   post '/', to: 'login#index'
   get '/logout', to: 'login#logout'
+  
+  get '/companies/:company_id/users/:id/edit_password' => 'users#edit_password'
     
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
