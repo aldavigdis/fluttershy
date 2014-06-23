@@ -6,8 +6,17 @@ class LoginController < ApplicationController
     ip_addr = IPAddr.new(request.remote_ip).to_i
     useragent = request.env['HTTP_USER_AGENT']
     this_login = Login.new
-    this_login.update_attributes(:user_id => user_id, :ip_addr => ip_addr, :useragent => useragent, :success => success)
+    this_login.update_attributes(
+      :user_id => user_id, :ip_addr => ip_addr, :useragent => useragent,
+      :success => success)
     return this_login.save
+  end
+  
+  def logout
+    reset_session
+    cookies.permanent.signed[:remember_user_id] = nil
+    cookies.permanent.signed[:remember_user_token] = nil
+    redirect_to root_path
   end
   
   def index
@@ -21,7 +30,7 @@ class LoginController < ApplicationController
       sleep 1
       check_user = User.find_by(email: params[:email])
       if check_user
-        password_hash = password_hash(params[:password],check_user.password_seed)
+        password_hash = password_hash(params[:password], check_user.password_seed)
         puts password_hash
         if check_user.password_hash == password_hash
           login_ok = true
@@ -40,7 +49,7 @@ class LoginController < ApplicationController
     # Check if user has a saved session
     elsif cookies.permanent.signed[:remember_user_id] && cookies.permanent.signed[:remember_user_token]
       check_user = User.find(cookies.permanent.signed[:remember_user_id])
-      check_hash = Digest::Whirlpool.hexdigest(cookies.permanent.signed[:remember_user_token]+check_user.password_seed)
+      check_hash = Digest::Whirlpool.hexdigest(cookies.permanent.signed[:remember_user_token] + check_user.password_seed)
       if check_user.remember_hash == check_hash
         login_ok = true
         login_user = check_user
@@ -79,13 +88,6 @@ class LoginController < ApplicationController
       # Redirect to the correct view
       redirect_to login_startpath(login_user.access)
     end
-  end
-  
-  def logout
-    reset_session
-    cookies.permanent.signed[:remember_user_id] = nil
-    cookies.permanent.signed[:remember_user_token] = nil
-    redirect_to root_path
   end
     
 end
