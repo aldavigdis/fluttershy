@@ -31,24 +31,12 @@ class ApplicationController < ActionController::Base
       end
       
     end
-  
-  def user_access_levels
-    return { User: 0, Kiosk: 1, Admin: 2, Superuser: 3, Superadmin: 4 }
     
     return %(
       <li class="#{css_class}"><a href="#{url.to_s}">#{text.to_s}</a></li>
     )
   end
   
-  def user_access_levels_available(access)
-    if access >= 2
-      output_hash = {}
-      user_access_levels.each do |key,value|
-        if value <= access
-          output_hash[key] = value
-        end
-      end
-      return output_hash
   def nav_item_sidebar(text, url, controller=nil, active=nil, icon=nil)
     if active == true
       css_class = 'active'
@@ -88,9 +76,6 @@ class ApplicationController < ActionController::Base
     render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
   end
   
-  def user_access
-    check_user = User.find(session[:user_id])
-    return check_user.access
   end
     
 end
