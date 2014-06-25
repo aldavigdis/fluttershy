@@ -49,7 +49,11 @@ class LoginController < ApplicationController
       if check_user
         password_hash = password_hash(params[:password], check_user.password_seed)
         puts password_hash
-        if check_user.password_hash == password_hash
+        if check_user.enabled == false
+          login_ok = false
+          @login_error = "User access has been disabled"
+          sleep 2
+        elsif check_user.password_hash == password_hash
           login_ok = true
           login_user = check_user
         else
