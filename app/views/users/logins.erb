@@ -1,0 +1,81 @@
+<header class="row" id="content-header">
+			
+		<nav class="col-md-4 col-md-push-8">
+			<% if session[:user_access] == 0 %>
+			<ul class="breadcrumb">
+				<li><%= link_to "My Info", company_user_path(session[:company_id], session[:user_id]) %></li>
+			</ul>
+			<% else %>
+			<ul class="breadcrumb">
+				<li><%= link_to "Users", :action => "index" %></li>
+				<li><%= link_to @user.fullname %></li>
+			</ul>
+			<% end %>
+		</nav>
+	
+		<div class="col-md-8 col-md-pull-4 current-heading">
+	
+			<h1>
+				Recent Login Attempts
+				<small><%= @user.fullname %></small>
+			</h1>
+		
+		</div>
+	
+</header>
+
+<div class="row">
+	
+	<div class="top-buttons col-md-8 col-sm-6">
+		<%= link_to "Back", company_user_path(), html_options = { class: "btn btn-default" } %>
+	</div>
+		
+	<div class="col-md-8">
+		
+		<% if @user.logins.any? %>
+		<div class="row">
+			<div class="col-md-12">
+				<% if session[:user_access] == 4 %>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Time and Date</th>
+							<th>IP Address</th>
+							<th>User Agent String</th>
+							<th>Result</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @user.logins.reverse.take(20).each do |login| %>
+						<tr>
+							<td>
+								<%= login.created_at %>
+							</td>
+							<td>
+								<%= IPAddr.new(login.ip_addr.to_i, Socket::AF_INET6).to_s %>
+							</td>
+							<td>
+								<%= login.useragent %>
+							</td>
+							<td>
+								<% if login.success == true %>
+								<span class="label label-success">Successful</span>
+								<% else %>
+								<span class="label label-danger">Failed</span>
+								<% end %>
+							</td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+				<% end %>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	
+	<div class="col-md-4">
+		<%= render "shared/company_sidebar" %>
+	</div>
+	
+</div>
