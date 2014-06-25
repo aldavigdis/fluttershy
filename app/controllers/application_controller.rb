@@ -18,9 +18,14 @@ class ApplicationController < ActionController::Base
       css_class = 'active'
     else
       
+      # The link is usually considered to be 'active' when it links to the
+      # current controller
       if params[:controller] == controller
         css_class = 'active'
       end
+      
+      # There are special rules about the 'active' state for the 'companies
+      # and 'users' controllers, because 'users' is a sub-model of 'companies'
       if controller == 'companies'
         if params[:company_id] && params[:company_id].to_i ==
           Flutter::CurrentUser.company
@@ -82,7 +87,10 @@ class ApplicationController < ActionController::Base
   # Examples
   #
   #   password_hash "hunter2", "hash"
-  #   => "611e3e8a01686f74791dc7e08c9afb761a309ce96642b45d77d41ca4849b435a[...]
+  #   => "611e3e8a01686f74791dc7e08c9afb761a309ce96642b45d77d41ca4849b435aa8f82f
+  #   3ac843e8447785f122630e1d39afea78b6b74ffd0e5017096fc580a293"
+  #
+  # Returns a hash based on the password and seed, a 512-bit string
   def password_hash(password, seed)
     return Digest::Whirlpool.hexdigest(password+seed)
   end
