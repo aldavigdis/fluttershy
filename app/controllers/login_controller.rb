@@ -8,6 +8,10 @@ class LoginController < ApplicationController
   # user_id - The user's ID
   # success - Boolean value for login success or failure
   #
+  # Logins older than 6 monts can be cleared by running 'rake delete:old_logins'
+  # — This should be set up as a Cron job and run every day to comply vith EU
+  # privacy regulations.
+  #
   # Returns true on success, false on falure.
   def login_register(user_id, success)
     ip_addr = IPAddr.new(request.remote_ip).to_i
