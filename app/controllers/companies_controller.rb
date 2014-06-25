@@ -1,5 +1,7 @@
 class CompaniesController < ApplicationController
   
+  require "Flutter"
+  
   def index
     if session[:user_access] == 3 || session[:user_access] == 4
       if params[:search]
