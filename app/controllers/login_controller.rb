@@ -61,6 +61,9 @@ class LoginController < ApplicationController
         @login_error = "Invalid username or password"
         sleep 2
       end
+      
+      # Register the login attempt
+      login_register(check_user.id, login_ok)
     
     # If not, check if user has a saved session
     elsif cookies.permanent.signed[:remember_user_id] && cookies.permanent.signed[:remember_user_token]
@@ -78,9 +81,6 @@ class LoginController < ApplicationController
     
     # Proceed with the login if everything checks out
     if login_ok === true
-      
-      # Register the login attempt
-      login_register(check_user.id, login_ok)
       
       # Set session variables
       session[:user_id] = login_user.id
