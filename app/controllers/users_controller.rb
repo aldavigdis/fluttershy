@@ -233,7 +233,7 @@ class UsersController < ApplicationController
       company: session[:company_id]
     })
     # Access is restricted to superadmin
-    access_ok = (Flutter::CurrentUser.is_superadmin
+    access_ok = Flutter::CurrentUser.is_superadmin
     respond_to do |format|
       format.html { render html: @user.logins }
       format.json { render json: @user.logins }
