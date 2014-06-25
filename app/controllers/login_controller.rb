@@ -17,9 +17,10 @@ class LoginController < ApplicationController
     ip_addr = IPAddr.new(request.remote_ip).to_i
     useragent = request.env['HTTP_USER_AGENT']
     this_login = Login.new
-    this_login.update_attributes(
-      :user_id => user_id, :ip_addr => ip_addr, :useragent => useragent,
-      :success => success)
+    
+    this_login.update_attributes(:user_id => user_id, :ip_addr => ip_addr,
+    :useragent => useragent, :success => success)
+    
     return this_login.save
   end
   
