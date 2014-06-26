@@ -1,22 +1,12 @@
 <nav class="" id="company-show-sidebar">
 	
 	<ul class="nav nav-pills nav-stacked">
-		<li>
-			<%= link_to "Company info", @company%>
-		</li>
-		<% if ((session[:user_access] == 2)&&(session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
-		<li>
-			<%= link_to "Users", company_users_path(@company) %>
-		</li>
+		<%= nav_item_sidebar("Company info", company_path(@company), nil, (params[:controller] == 'companies'), 'briefcase').html_safe %>
+		<% if ((session[:user_access] == 2) && (session[:company_id] == @company.id)) || session[:user_access] == 3 || session[:user_access] == 4 %>
+		<%= nav_item_sidebar("Users", company_users_path(@company), nil, (params[:controller] == 'users'), 'user').html_safe %>
+		<% elsif session[:user_access] == 0 %>
+		<%= nav_item_sidebar("My Info", company_user_path(session[:company_id], session[:user_id]), nil, (params[:controller] == 'users'), 'user').html_safe %>
 		<% end %>
 	</ul>
-	
-	<% if session[:user_access] == 4 %>
-	<ul class="nav nav-pills nav-stacked">
-		<li>
-			<%= link_to "Back to companies", companies_path%>
-		</li>
-	</ul>
-	<% end %>
-	
+		
 </nav>
