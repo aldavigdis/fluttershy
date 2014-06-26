@@ -3,26 +3,6 @@ class LoginController < ApplicationController
   
   layout "login", only: [:index]
   
-  # Public: Register login attempt in the database.
-  #
-  # user_id - The user's ID
-  # success - Boolean value for login success or failure
-  #
-  # Logins older than 6 monts can be cleared by running 'rake delete:old_logins'
-  # — This should be set up as a Cron job and run every day to comply vith EU
-  # privacy regulations.
-  #
-  # Returns true on success, false on falure.
-  def login_register(user_id, success)
-    ip_addr = IPAddr.new(request.remote_ip).to_i
-    useragent = request.env['HTTP_USER_AGENT']
-    this_login = Login.new
-    
-    this_login.update_attributes(:user_id => user_id, :ip_addr => ip_addr,
-    :useragent => useragent, :success => success)
-    
-    return this_login.save
-  end
   
   # Public: Log the user out
   #
@@ -113,6 +93,27 @@ class LoginController < ApplicationController
       
       # Redirect to the correct view
       redirect_to login_startpath(login_user.access)
+  # Private: Register login attempt in the database.
+  #
+  # user_id - The user's ID
+  # success - Boolean value for login success or failure
+  #
+  # Logins older than 6 monts can be cleared by running 'rake delete:old_logins'
+  # — This should be set up as a Cron job and run every day to comply vith EU
+  # privacy regulations.
+  #
+  # Returns true on success, false on falure.
+  private
+  def login_register(user_id, success)
+    ip_addr = IPAddr.new(request.remote_ip).to_i
+    useragent = request.env['HTTP_USER_AGENT']
+    this_login = Login.new
+    
+    this_login.update_attributes(:user_id => user_id, :ip_addr => ip_addr,
+    :useragent => useragent, :success => success)
+    
+    return this_login.save
+  end
     end
   end
     
