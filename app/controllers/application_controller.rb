@@ -1,4 +1,3 @@
-# Todo: Move reusable things into Flutter.rb
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -7,13 +6,15 @@ class ApplicationController < ActionController::Base
   helper_method :nav_item
   helper_method :nav_item_sidebar
   
-  # Public: Create a Bootstrap-compatable navigation item for the top nav
+  # Creates a Bootstrap-compatable navigation item for the top nav.
   #
-  # text        - The link text
-  # url         - The link url
-  # controller  - The name of the controller associated with the link
-  # forceActive - Force the link to have an 'active' state
-  def nav_item(text, url, controller=nil, forceActive=nil)
+  # @param text [String] The link text
+  # @param url [String] The link url
+  # @param controller [String] The name of the controller being linked to
+  # @param forceActive [Boolean] Force the link to have an 'active' state
+  #
+  # @return [String] The HTML markup for the navigation item
+  def nav_item(text, url, controller=nil, forceActive=false)
     if forceActive == true
       css_class = 'active'
     else
@@ -49,12 +50,14 @@ class ApplicationController < ActionController::Base
     )
   end
   
-  # Public: Create a Bootstrap-compatable navigation item for sidebar nav
+  # Creates a Bootstrap-compatable navigation item for sidebar nav.
   #
-  # text       - The link text
-  # url        - The link url
-  # controller - The name of the controller associated with the link
-  # icon       - The Glyphicon to use for the navigation element
+  # @param text [String] The link text
+  # @param url [String] The link url
+  # @param controller [String] The name of the controller being linked to
+  # @param icon [String] The Glyphicon to use for the navigation element
+  #
+  # @return [String] The HTML markup for the navigation item
   def nav_item_sidebar(text, url, controller=nil, active=nil, icon=nil)
     if active == true
       css_class = 'active'
@@ -69,33 +72,35 @@ class ApplicationController < ActionController::Base
     return link_string
   end
   
-  # Public: Create a base-36 random password seed based on a 512-bit hex string
+  # Creates a base-36 random password seed based on a 512-bit hex string
   #
-  # Examples
+  # @return [String]
   #
+  # @example
   #   password_seed
   #   => "2yvw1dt2cin418ekaevykylf69o8guk4ccq1by9mmn8sgr4ajr"
   def password_seed
     return SecureRandom.hex(n=32).to_i(16).to_s(36)
   end
   
-  # Public: Create a password hash using Whirlpool
+  # Creates a 512-bit password hash digest using Whirlpool
   #
-  # password - The password to encrypt
-  # seed     - The password seed
+  # @param password [String] The password
+  # @param seed [String] The password seed
   #
-  # Examples
-  #
+  # @example
   #   password_hash "hunter2", "hash"
   #   => "611e3e8a01686f74791dc7e08c9afb761a309ce96642b45d77d41ca4849b435aa8f82f
   #   3ac843e8447785f122630e1d39afea78b6b74ffd0e5017096fc580a293"
   #
-  # Returns a hash based on the password and seed, a 512-bit string
+  # @return [String] Hash based on the password and seed, a 512-bit string
   def password_hash(password, seed)
     return Digest::Whirlpool.hexdigest(password+seed)
   end
   
-  # Public: Get the correct start/home path based on the user's access level
+  # Gets the correct start/home path based on the user's access level
+  #
+  # @param access [Integer] The user's numeric access level
   def login_startpath(access)
     case session[:user_access]
     when 0..2
@@ -105,7 +110,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  # Public: Render a 403 Forbidden error
+  # Render a 403 Forbidden error
+  #
+  # @example
+  #   if Flutter::CurrentUser.is_least_superuser
+  #      render "foobar"
+  #   else
+  #     access_denied
+  #   end
   def access_denied
     render(
       :file => File.join(Rails.root, 'public/403.html'), :status => 403,

@@ -1,9 +1,11 @@
+# @todo Make sure *Admin* or lower is not able to create/update/destroy a *Superuser* or *Superadmin*
+# @todo Make sure *Superuser* or lower is not able to create/edit/update/destroy users assigned to other companies
 class UsersController < ApplicationController
   
   # Include the Flutter library
   require "Flutter"
   
-  # Public: List users assigned to the current company
+  # List users assigned to the current company
   def index
     @company = Company.find(params[:company_id])
     Flutter::CurrentUser.init_data({
@@ -31,7 +33,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: Form to create and assign user to the current company
+  # Form to create and assign user to the current company
   def new
     @company = Company.find(params[:company_id])
     Flutter::CurrentUser.init_data({
@@ -55,7 +57,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: Form to edit a user assigned to the current company
+  # Form to edit a user assigned to the current company
   def edit
     @company = Company.find(params[:company_id])
     @user = User.find(params[:id])
@@ -74,7 +76,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: Update a user
+  # Update a user
   def update
     @company = Company.find(params[:company_id])
     Flutter::CurrentUser.init_data({
@@ -96,7 +98,7 @@ class UsersController < ApplicationController
       
       if params[:user]["password"].present?
         @user.update_attributes(:password_hash => user_hash,
-        :password_seed => user_seed)
+        :password_seed => user_seed, :remember_hash => nil)
         @user.save
       end
       
@@ -111,7 +113,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: Create a user
+  # Create a user
   def create
     @company = Company.find(params[:company_id])
     Flutter::CurrentUser.init_data({
@@ -144,7 +146,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: Show a user
+  # Show a user
   def show
     @company = Company.find(params[:company_id])
     Flutter::CurrentUser.init_data({
@@ -173,6 +175,7 @@ class UsersController < ApplicationController
     end
   end
   
+  # Destroy a user
   def destroy
     @company = Company.find(params[:company_id])
     Flutter::CurrentUser.init_data({
@@ -192,8 +195,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: Show the edit_password view
-  # Todo: Finish this
+  # Show the edit_password view
   def edit_password
     @company = Company.find(params[:company_id])
     @user = User.find(params[:id])
@@ -208,8 +210,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: Submit the new password from edit_password
-  # Todo: Finish this
+  # Submit the new password from edit_password
   def update_password
     @company = Company.find(params[:company_id])
     @user = User.find(params[:id])
@@ -217,6 +218,7 @@ class UsersController < ApplicationController
       access: session[:user_access],
       company: session[:company_id]
     })
+    # Access is restricted to users (only self)
     if Flutter::CurrentUser.is_user && (params[:id].to_i == session[:user_id])
       render "show"
     else
@@ -224,7 +226,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # Public: List a users's login attempts
+  # List a users's login attempts
   def logins
     @company = Company.find(params[:company_id])
     @user = User.find(params[:id])

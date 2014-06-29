@@ -5,7 +5,7 @@ class Company < ActiveRecord::Base
   # This is a custom query to look up company accounts by each column in the
   # company table.
   #
-  # Todo: Make compatable with RDMSs other than MySQL/MariaDB (sqlite3/postgres)
+  # @todo Make sure this is compatable with RDMSs compatable with Rails, other than MySQL/MariaDB (sqlite3/postgres)
   def self.search(search)
     if search and search[:name].present?
       bind = '%' + search[:name] + '%'
