@@ -8,7 +8,7 @@ class LoginController < ApplicationController
   # Logs the user out
   #
   # Logs the user out by clearing cookies and session data, and then redirects
-  # to the root path.
+  #   to the root path.
   def logout
     user_lookup = User.find_by id: session[:user_id]
     user_lookup.update_attributes(:remember_hash => nil)
@@ -71,8 +71,8 @@ class LoginController < ApplicationController
   # @param success [Boolean] Boolean value for login success or failure
   #
   # Logins older than 6 monts can be cleared by running 'rake delete:old_logins'
-  # — This rake task should be set up as a Cron job and run every day to comply
-  # vith EU privacy regulations.
+  #   — This rake task should be set up as a Cron job and run every day to
+  #   comply vith EU privacy regulations.
   #
   # Returns true on success, false on falure.
   def login_register(user_id, success)
