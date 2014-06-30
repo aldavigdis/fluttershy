@@ -7,6 +7,9 @@ Fluttershy::Application.routes.draw do
   
   resources :companies do
     resources :users
+    get '/users/:id/edit_password' => 'users#edit_password'
+    get '/users/:id/update_password', to: redirect('companies/%{company_id}/users/%{id}/edit_password')
+    patch '/users/:id/update_password' => 'users#update_password'
   end
   
   get '/', to: 'login#index'
