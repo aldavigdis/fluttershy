@@ -33,7 +33,7 @@ module Flutter
         end
         return output_hash
       else
-        return {}
+        return false
       end
     end
     
@@ -63,7 +63,7 @@ module Flutter
     #
     # @return [boolean, integer] The company ID (Primary Key), false on faliure
     def self.company
-      if @@user_data
+      if defined?(@@user_data)
         return @@user_data[:company]
       else
         return false
@@ -77,7 +77,7 @@ module Flutter
     #
     # @return [boolean]
     def self.is_least_superuser
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] >= 3
       else
         return false
@@ -91,7 +91,7 @@ module Flutter
     #
     # @return [boolean]
     def self.is_least_admin
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] >= 2
       else
         return false
@@ -105,7 +105,7 @@ module Flutter
     #
     # @return [boolean]
     def self.is_least_kiosk
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] >= 1
       else
         return false
@@ -119,7 +119,7 @@ module Flutter
     #
     # @return [boolean]
     def self.is_least_user
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] >= 0
       else
         return false
@@ -133,7 +133,7 @@ module Flutter
     #
     # @return [boolean]
     def self.is_superadmin
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] === 4
       else
         return false
@@ -147,13 +147,12 @@ module Flutter
     #
     # @return [boolean]
     def self.is_superuser
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] === 3
       else
         return false
       end
     end
-  
     
     # Check if the user is an _admin_.
     #
@@ -162,13 +161,12 @@ module Flutter
     #
     # @return [boolean]
     def self.is_admin
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] === 2
       else
         return false
       end
     end
-  
     
     # Check if the user is a _kiosk_ user.
     #
@@ -177,7 +175,7 @@ module Flutter
     #
     # @return [boolean]
     def self.is_kiosk
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] === 1
       else
         return false
@@ -192,7 +190,7 @@ module Flutter
     #
     # @return [boolean]
     def self.is_user
-      if @@user_data
+      if defined?(@@user_data[:access]) && @@user_data[:access] != nil
         return @@user_data[:access] === 0
       else
         return false
