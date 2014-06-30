@@ -5,10 +5,15 @@ module Flutter
     
     # The standard access levels
     #
-    # * 0 - User: A normal user with mostly read-only access to data assigned to him/her and basic info on the company he/she is assigned to. Can change own password, but an *Admin* can only change or assign or modify other info.
+    # * 0 - User: A normal user with mostly read-only access to data assigned
+    #   to him/her and basic info on the company he/she is assigned to. Can
+    #   change own password, but an *Admin* can only change or assign or modify
+    #   other info.
     # * 1 - Kiosk: Reserved for self-service kiosks.
-    # * 2 - Admin: Can read/write access to own company. Can add and edit info for users assigned to the same company.
-    # * 3 - Superuser: Aimed at level 1 support employees. Has read-only access to data on every company and to every user in every company.
+    # * 2 - Admin: Can read/write access to own company. Can add and edit info
+    #   for users assigned to the same company.
+    # * 3 - Superuser: Aimed at level 1 support employees. Has read-only access
+    #   to data on every company and to every user in every company.
     # * 4 - Superadmin: Has read and write access to every user in every company.
     @@levels = { User: 0, Kiosk: 1, Admin: 2, Superuser: 3, Superadmin: 4 }
     
@@ -22,7 +27,8 @@ module Flutter
     # Get the user access levels of new users the current user can create
     #
     # @param my_access [Integer] The access level of the current user
-    # @return [Hash, Boolean] Hash with access levels of users the current user is able to create, or false if the current user cannot create new users.
+    # @return [Hash, Boolean] Hash with access levels of users the current user
+    #   is able to create, or false if the current user cannot create new users.
     def self.new_user_access_levels(my_access)
       if my_access >= 2
         output_hash = {}
@@ -181,7 +187,6 @@ module Flutter
         return false
       end
     end
-  
     
     # Check if the user is a normal _user_.
     #
