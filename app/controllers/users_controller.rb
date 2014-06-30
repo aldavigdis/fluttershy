@@ -199,6 +199,7 @@ class UsersController < ApplicationController
   def edit_password
     @company = Company.find(params[:company_id])
     @user = User.find(params[:id])
+    @errors = []
     Flutter::CurrentUser.init_data({
       access: session[:user_access],
       company: session[:company_id]
@@ -214,13 +215,32 @@ class UsersController < ApplicationController
   def update_password
     @company = Company.find(params[:company_id])
     @user = User.find(params[:id])
+    @user_access_levels = Flutter::Access.levels
     Flutter::CurrentUser.init_data({
       access: session[:user_access],
       company: session[:company_id]
     })
     # Access is restricted to users (only self)
     if Flutter::CurrentUser.is_user && (params[:id].to_i == session[:user_id])
-      render "show"
+      @errors = []
+      if params[:user][:current_password] && params[:user][:new_password] && params[:user][:new_password_confirm]
+        if params[:user][:new_password] != params[:user][:new_password_confirm]
+          @errors << "The passwords do not match"
+        end
+        if password_hash(params[:user][:current_password], @user.password_seed) != @user.password_hash
+          @errors << "The current password you entered is incorrect."
+        end
+      else
+        @errors << "You need to supply your current password, your new password and a confirmation of your new password."
+      end
+      if @errors.any?
+        render "edit_password"
+      else
+        user_seed = password_seed
+        user_hash = password_hash params[:user][:new_password], user_seed
+        @user.update(password_hash: user_hash, password_seed: user_seed)
+        render "show"
+      end
     else
       access_denied
     end
