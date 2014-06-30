@@ -84,17 +84,23 @@ class UsersController < ApplicationController
       company: session[:company_id]
     })
     @user = User.find(params[:id])
-    if (session[:user_access] == 2 && @company.id == session[:company_id] &&
-      session[:user_access] >= @user.access) || session[:user_access] == 4
+    
+    # Access is restricted to admin of company and superadmin
+    # The user in not able to edit or make a user with greater privileges than
+    #   himself
+    access_ok = (((@company.id == session[:company_id] &&
+      Flutter::CurrentUser.is_admin) || Flutter::CurrentUser.is_superadmin) &&
+      ((session[:user_access] >= params[:user]["access"].to_i) ||
+      (session[:user_access] >= @user.access)))
+    
+    if access_ok
       
       user_seed = password_seed
       user_hash = password_hash(params[:user]["password"], user_seed)
       
-      if session[:user_access] >= params[:user]["access"].to_i
-        @user.update_attributes(:access => params[:user]["access"],
-        :enabled => params[:user]["access"])
-        @user.save
-      end
+      @user.update_attributes(:access => params[:user]["access"],
+      :enabled => params[:user]["access"])
+      @user.save
       
       if params[:user]["password"].present?
         @user.update_attributes(:password_hash => user_hash,
@@ -122,9 +128,11 @@ class UsersController < ApplicationController
     })
     
     # Access is restricted to admin of company and superadmin
-    access_ok = (Flutter::CurrentUser.is_admin &&
-    (@company.id == Flutter::CurrentUser.company)) ||
-    @company.id == Flutter::CurrentUser.is_superadmin
+    # The user in not able to create a user with greater privileges than himself
+    access_ok = (((@company.id == session[:company_id] &&
+      Flutter::CurrentUser.is_admin) || Flutter::CurrentUser.is_superadmin) &&
+      ((session[:user_access] >= params[:user]["access"].to_i) ||
+      (session[:user_access] >= @user.access)))
     
     if access_ok
       @user = User.new(user_params)
@@ -158,8 +166,8 @@ class UsersController < ApplicationController
     
     # Access is restricted to superuser, superadmin, admin and self
     access_ok = Flutter::CurrentUser.is_least_superuser ||
-      (Flutter::CurrentUser.is_admin && (@user.company_id == Flutter::CurrentUser.company)) ||
-      (session[:user_id] == @user.id)
+      (Flutter::CurrentUser.is_admin && (@user.company_id ==
+      Flutter::CurrentUser.company)) || (session[:user_id] == @user.id)
     
     if access_ok
       render_exceptions = [:comments, :password_hash, :password_seed,
@@ -182,12 +190,16 @@ class UsersController < ApplicationController
       access: session[:user_access],
       company: session[:company_id]
     })
-    
     @user = User.find_by(id: params[:id], company_id: params[:company_id])
-    if (((session[:user_access] == 2) &&
-      (@company.id == session[:company_id]) &&
-        session[:user_access] >= @user.access) ||
-        session[:user_access] == 4) && @user.id != session[:user_id]
+    
+    # Access is restricted to admin of company and superadmin
+    # The user in not able to destroy himself or a user with greater privileges
+    #   than himself
+    access_ok = (((@company.id == session[:company_id] &&
+      Flutter::CurrentUser.is_admin) || Flutter::CurrentUser.is_superadmin) &&
+      (session[:user_access] >= @user.access))
+    
+    if access_ok
       @user.destroy
       redirect_to company_users_path(@company)
     else
