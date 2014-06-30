@@ -13,9 +13,11 @@ class LoginController < ApplicationController
     user_lookup = User.find_by id: session[:user_id]
     user_lookup.update_attributes(:remember_hash => nil)
     user_lookup.save
+    
     reset_session
     cookies.permanent.signed[:remember_user_id] = nil
     cookies.permanent.signed[:remember_user_token] = nil
+    
     redirect_to root_path
   end
   

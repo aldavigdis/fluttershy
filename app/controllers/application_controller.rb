@@ -119,10 +119,8 @@ class ApplicationController < ActionController::Base
   #     access_denied
   #   end
   def access_denied
-    render(
-      :file => File.join(Rails.root, 'public/403.html'), :status => 403,
-      :layout => false
-    )
+    render file: File.join(Rails.root, 'public/403.html'), status: 403,
+      layout: false, content_type: 'text/html'
   end
     
 end
